@@ -13,4 +13,5 @@
  <servlet-name>Accueil</servlet-name>
  <url-pattern>/accueil</url-pattern> 
  </servlet-mapping>
+ 
 </web-app>
