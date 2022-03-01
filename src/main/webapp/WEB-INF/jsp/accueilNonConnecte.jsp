@@ -12,7 +12,7 @@
 </header>
 <main>
     <div name="connexion">
-	<a href="<%=request.getContextPath() %>/sevletconnexion">
+	<a href="<%=request.getContextPath() %>/connexion">
 		<button>Connexion</button>
 	</a>
 
