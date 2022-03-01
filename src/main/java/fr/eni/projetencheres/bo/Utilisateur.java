@@ -1,6 +1,6 @@
 package fr.eni.projetencheres.bo;
 
-public class Utilsateur {
+public class Utilisateur {
 	
 	//Attributs utilisateurs
 	
@@ -19,7 +19,7 @@ public class Utilsateur {
 	//Constructeurs
 	
 	//sans id
-	public Utilsateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -33,7 +33,7 @@ public class Utilsateur {
 	}
 	
 	//avec id
-	public Utilsateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 		this(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
 		this.noUtilisateur = noUtilisateur;		
