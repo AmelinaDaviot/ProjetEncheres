@@ -116,6 +116,15 @@ public class Utilsateur {
 		return noUtilisateur;
 	}
 	
+	
+	//Methode toString
+	@Override
+	public String toString() {
+		return "Utilsateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + "]";
+	}
+	
 
 	
 
