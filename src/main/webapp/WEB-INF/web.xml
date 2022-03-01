@@ -7,7 +7,7 @@
     </welcome-file-list>
  <servlet>
  <servlet-name>Accueil</servlet-name>
-  <jsp-file>/WEB-INF/jsp/PageAccueilNonConnecte.jsp</jsp-file>
+  <jsp-file>/WEB-INF/jsp/accueilNonConnecte.jsp</jsp-file>
  </servlet> 
  <servlet-mapping>
  <servlet-name>Accueil</servlet-name>
