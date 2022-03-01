@@ -21,6 +21,9 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/**
+		 * Afficher la page inscription
+		 */
 		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
 		if (rq != null) {
 			rq.forward(request, response);
@@ -34,7 +37,30 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/**
+		 * Récupération des données enregistrées par l'utilisateur
+		 */
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String tel = request.getParameter("tel");
+		String rue = request.getParameter("rue");
+		String cpo = request.getParameter("cpo");
+		String ville = request.getParameter("ville");
+		String mdp = request.getParameter("mdp");
+		String confirmation = request.getParameter("confirmation");
 		
+		
+		
+		/**
+		 * Bouton "Créer" renvoie à la page d'accueil connecté
+		 */
+		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
+		if (rq != null) {
+			rq.forward(request, response);
+		} else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 }

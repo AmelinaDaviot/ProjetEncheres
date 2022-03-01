@@ -41,7 +41,7 @@
                 </div>
                 <div class="forms-control">
                     <label for="cpo">Code Postal :</label>
-                    <input type="number" id="cpo" name="cpo" required="required">
+                    <input type="text" id="cpo" name="cpo" required="required">
                 </div>
                 <div class="forms-control">
                     <label for="ville">Ville :</label>
