@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title></title>
+<link rel="stylesheet" href="css/style.css">
+<title>Connexion</title>
 </head>
 <body>
 
