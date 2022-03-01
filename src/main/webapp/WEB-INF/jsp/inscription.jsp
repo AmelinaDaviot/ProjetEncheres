@@ -14,7 +14,7 @@
         </header>
         <main>
             <h2>Mon profil</h2>
-            <form action="<%request.getContextPath(); %>/inscription" method="post">
+            <form action="<%=request.getContextPath() %>/inscription" method="post">
                 <div class="forms-control">
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo" required="required">
@@ -58,9 +58,10 @@
                 
                 <div class="button">
                     <button type="submit">Créer</button>
-                    <a href=""><button>Annuler</button></a>
+                    
                 </div>
             </form>
+            <a href="<%=request.getContextPath()%>/accueil"><button>Annuler</button></a>
         </main>
         <footer></footer>
     </div>

@@ -12,3 +12,7 @@ main h2{
     font-size: 20px;
     text-decoration: solid;
 }
+
+button{
+    padding: 15px;
+}
