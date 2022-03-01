@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header h1{
+    font-size: 30px;
+}
+
+main h2{
+    text-align: center;
+    font-size: 20px;
+    text-decoration: solid;
+}
+
+button{
+    padding: 15px;
+}
