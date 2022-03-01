@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource 
+		
+		name="jdbc/pool_cnx"
+		type="javax.sql.DataSource"
+		maxTotal="100"
+		maxIdle="30"
+		maxWaitMillis="10000"
+		username="sa"
+		password="Pa$$w0rd"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		url="jdbc:sqlserver://localhost:1433;databasename=ENCHERES_BDD"
+	
+	/>
+</Context>
