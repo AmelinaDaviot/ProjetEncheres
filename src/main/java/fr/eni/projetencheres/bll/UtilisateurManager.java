@@ -17,8 +17,7 @@ public class UtilisateurManager {
 		try {
 			dao = DAOFactory.createUtilisateurDAO();
 		} catch (SQLException e) {
-	
-			
+
 		}
 	}
 
@@ -32,10 +31,16 @@ public class UtilisateurManager {
 
 	// methode de verification de connection
 	// TODO Gestion d'erreur
-	public Utilisateur seConnecter(String login, String motDePasse) {
+	public Utilisateur seConnecter(String pseudo, String motDePasse) {
 		Utilisateur user;
-		user = dao.seConnecter(login, motDePasse);
+		user = dao.seConnecter(pseudo, motDePasse);
 		return user;
+	}
+
+	public void sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) {
+		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		dao.insert(user);
 	}
 
 }

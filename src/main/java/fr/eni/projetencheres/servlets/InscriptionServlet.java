@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetencheres.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class InscriptionServlet
  */
@@ -38,7 +40,7 @@ public class InscriptionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/**
-		 * Récupération des données enregistrées par l'utilisateur
+		 * Rï¿½cupï¿½ration des donnï¿½es enregistrï¿½es par l'utilisateur
 		 */
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
@@ -50,9 +52,8 @@ public class InscriptionServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		String confirmation = request.getParameter("confirmation");
 		
-		
 		/*
-		 * Si création du profil est validée, l'utilisateur est redirigé vers la page d'accueil
+		 * Si crï¿½ation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
 		 */
 		response.sendRedirect("/WEB-INF/jsp/accueilConnecte.jsp");
 		
