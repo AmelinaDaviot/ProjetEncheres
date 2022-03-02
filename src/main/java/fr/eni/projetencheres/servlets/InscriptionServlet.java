@@ -52,6 +52,8 @@ public class InscriptionServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		String confirmation = request.getParameter("confirmation");
 		
+		UtilisateurManager um = UtilisateurManager.getInstance();
+
 		
 		/*
 		 * Si cr�ation du profil est valid�e, l'utilisateur est redirig� vers la page d'accueil
