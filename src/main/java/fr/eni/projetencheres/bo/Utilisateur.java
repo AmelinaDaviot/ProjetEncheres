@@ -38,6 +38,8 @@ public class Utilisateur {
 		this(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
 		this.noUtilisateur = noUtilisateur;		
 	}
+	
+	
 
 	//Getter et Setter	
 	public String getPseudo() {
