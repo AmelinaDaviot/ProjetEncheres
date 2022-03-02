@@ -17,6 +17,10 @@ button{
     padding: 15px;
 }
 
+.deconnexion{
+    text-align: right;
+}
+
 .first-btn button{
     background-color: red;
 }
