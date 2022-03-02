@@ -56,12 +56,14 @@
                     <input type="password" id="confirmation" name="confirmation" required="required">
                 </div>   
                 
-                <div class="button">
+                <div class="first-btn">
                     <button type="submit">Créer</button>
                     
                 </div>
             </form>
-            <a href="<%=request.getContextPath()%>/accueil"><button>Annuler</button></a>
+            <div class="first-btn">
+                <a href="<%=request.getContextPath()%>/accueil"><button>Annuler</button></a>
+            </div>
         </main>
         <footer></footer>
     </div>

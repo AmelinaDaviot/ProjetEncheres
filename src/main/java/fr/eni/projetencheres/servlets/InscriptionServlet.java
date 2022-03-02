@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetencheres.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class InscriptionServlet
  */
@@ -49,6 +51,8 @@ public class InscriptionServlet extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String mdp = request.getParameter("mdp");
 		String confirmation = request.getParameter("confirmation");
+		
+		UtilisateurManager um = UtilisateurManager.getInstance();
 		
 		
 		/*
