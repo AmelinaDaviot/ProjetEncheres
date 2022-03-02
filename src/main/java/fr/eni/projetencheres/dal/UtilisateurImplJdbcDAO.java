@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.utils.ConnectionProvider;
 
+/**
+ * @author adaviot2021
+ *
+ */
 public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 	private final static String SE_CONNECTER = "SELECT no_utilisateur, pseudo, nom, prenom, email "
@@ -88,6 +92,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		}
 	}
 
+	
+	/**
+	 * @return user
+	 */
 	@Override
 	public Utilisateur selectById(int no_utilisateur) {
 		ResultSet rs = null;
@@ -97,16 +105,16 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setInt(1, no_utilisateur);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				user = new Utilisateur();
+				user = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+						rs.getString("code_postal"), rs.getString("ville"), null, rs.getInt("credit"));
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-		return null;
+		return user;
 	}
 
 	@Override
