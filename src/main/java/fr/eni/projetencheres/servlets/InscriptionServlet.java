@@ -45,21 +45,21 @@ public class InscriptionServlet extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");
 		String rue = request.getParameter("rue");
 		String cpo = request.getParameter("cpo");
 		String ville = request.getParameter("ville");
 		String mdp = request.getParameter("mdp");
-		String confirmation = request.getParameter("confirmation");
+//		String confirmation = request.getParameter("confirmation");
 		
 		UtilisateurManager um = UtilisateurManager.getInstance();
+		um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
 
-		
-		/*
-		 * Si crï¿½ation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
-		 */
+		//Si creation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
 		response.sendRedirect("/WEB-INF/jsp/accueilConnecte.jsp");
 		
 	}
+	// TODO méthode verif mdp = confirmation
 
 }
