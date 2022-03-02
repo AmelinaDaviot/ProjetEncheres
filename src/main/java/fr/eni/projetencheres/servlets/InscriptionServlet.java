@@ -49,15 +49,19 @@ public class InscriptionServlet extends HttpServlet {
 		String cpo = request.getParameter("cpo");
 		String ville = request.getParameter("ville");
 		String mdp = request.getParameter("mdp");
-//		String confirmation = request.getParameter("confirmation");
+		String confirmation = request.getParameter("confirmation");
 		
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
-
-		//Si creation du profil est validee, l'utilisateur est redirige vers la page d'accueil
-		response.sendRedirect(request.getContextPath() + "/accueillir");
+		try {
+			um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp, confirmation);
+			
+			//Si creation du profil est validee, l'utilisateur est redirige vers la page d'accueil
+			response.sendRedirect(request.getContextPath() + "/accueillir");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
-	// TODO méthode verif mdp = confirmation
 
 }
