@@ -16,3 +16,7 @@ main h2{
 button{
     padding: 15px;
 }
+
+.first-btn button{
+    background-color: red;
+}
