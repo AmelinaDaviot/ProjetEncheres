@@ -43,7 +43,7 @@ public class UtilisateurManager {
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 		dao.insert(user);
 		} else {
-			Exception BLLException = new Exception();
+			Exception BLLException = new Exception("mots de passes différent");
 			throw BLLException;
 			
 		} 
