@@ -1,9 +1,9 @@
 package fr.eni.projetencheres.bo;
 
 public class Utilisateur {
-	
-	//Attributs utilisateurs
-	
+
+	// Attributs utilisateurs
+
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -11,14 +11,14 @@ public class Utilisateur {
 	private String email;
 	private String telephone;
 	private String rue;
-	private String codePostal;	
-	private String ville;	
+	private String codePostal;
+	private String ville;
 	private String motDePasse;
-	
-	
-	//Constructeurs
-	
-	//sans id
+	private int credit;
+
+	// Constructeurs
+
+	// sans id
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 		this.pseudo = pseudo;
@@ -31,17 +31,23 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 	}
-	
-	//avec id
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) {
-		this(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
-		this.noUtilisateur = noUtilisateur;		
-	}
-	
-	
 
-	//Getter et Setter	
+	// avec id
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) {
+		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		this.noUtilisateur = noUtilisateur;
+	}
+
+	// avec id et crédit
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit) {
+		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		this.noUtilisateur = noUtilisateur;
+		this.credit = credit;
+	}
+
+	// Getter et Setter
 	public String getPseudo() {
 		return pseudo;
 	}
@@ -117,19 +123,13 @@ public class Utilisateur {
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
-	
-	
-	//Methode toString
+
+	// Methode toString
 	@Override
 	public String toString() {
 		return "Utilsateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + "]";
 	}
-	
-
-	
-
-	
 
 }
