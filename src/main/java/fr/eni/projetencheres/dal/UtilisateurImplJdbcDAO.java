@@ -11,7 +11,8 @@ import fr.eni.projetencheres.utils.ConnectionProvider;
 public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	
 	private final static String SE_CONNECTER = 
-			"SELECT no_utilisateur, pseudo, nom, prenom, email FROM UTILISATEURS "
+			"SELECT no_utilisateur, pseudo, nom, prenom, email "
+			+ "FROM UTILISATEURS "
 			+ "WHERE pseudo = ? AND mot_de_passe = ?";
 	
 	private final static String INSERT_NOUVEL_UTILISATEUR = 
@@ -25,7 +26,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		cnx = ConnectionProvider.getConnection();
 	}
 	
-	
+	/**
+	 * Methode seConnecter
+	 * @return user
+	 */
 	@Override
 	public Utilisateur seConnecter(String pseudo, String mot_de_passe) {
 		Utilisateur user = null;
