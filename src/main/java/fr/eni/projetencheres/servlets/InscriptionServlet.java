@@ -51,16 +51,11 @@ public class InscriptionServlet extends HttpServlet {
 		String confirmation = request.getParameter("confirmation");
 		
 		
-		
-		/**
-		 * Bouton "Créer" renvoie à la page d'accueil connecté
+		/*
+		 * Si création du profil est validée, l'utilisateur est redirigé vers la page d'accueil
 		 */
-		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
-		if (rq != null) {
-			rq.forward(request, response);
-		} else {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		}
+		response.sendRedirect("/WEB-INF/jsp/accueilConnecte.jsp");
+		
 	}
 
 }
