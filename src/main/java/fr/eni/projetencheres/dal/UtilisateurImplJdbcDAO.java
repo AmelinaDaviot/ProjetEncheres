@@ -2,12 +2,17 @@ package fr.eni.projetencheres.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.utils.ConnectionProvider;
 
 public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
+	
+	private final static String SE_CONNECTER = 
+			"SELECT no_utilisateur, pseudo, nom, prenom, email FROM UTILISATEURS "
+			+ "WHERE pseudo = ? AND mot_de_passe = ?";
 	
 	private final static String INSERT_NOUVEL_UTILISATEUR = 
 			"INSERT INTO UTILISATEURS"
@@ -20,6 +25,45 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		cnx = ConnectionProvider.getConnection();
 	}
 	
+	
+	@Override
+	public Utilisateur seConnecter(String pseudo, String mot_de_passe) {
+		Utilisateur user = null;
+		try {
+			PreparedStatement stmt = cnx.prepareStatement(SE_CONNECTER);
+			stmt.setString(1, pseudo);
+			stmt.setString(2, mot_de_passe);
+			
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				user = new Utilisateur(rs.getInt("no_utilisateur"),
+						rs.getString("pseudo"),
+						rs.getString("nom"),
+						rs.getString("prenom"),
+						rs.getString("email"),
+						rs.getString("telephone"),
+						rs.getString("rue"),
+						rs.getString("code_postal"),
+						rs.getString("ville"),
+						null
+						);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur de connexion");
+			e.getMessage();
+		}
+		
+		if (user == null) {
+			System.out.println("Utilisateur inconnu");
+		}
+		
+		return user;
+	}
+	
+	/**
+	 * Procédure insertion
+	 * Insérer un nouvel utilisateur (inscription)
+	 */
 	@Override
 	public void insert(Utilisateur user) {
 		try {
@@ -42,5 +86,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		
 		
 	}
+
+	
 
 }
