@@ -1,6 +1,9 @@
 package fr.eni.projetencheres.bll;
 
+import java.sql.SQLException;
+
 import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.dal.DAOFactory;
 import fr.eni.projetencheres.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
@@ -11,7 +14,12 @@ public class UtilisateurManager {
 
 	// constructeur + conncetion avec DAO
 	public UtilisateurManager() {
-		dao = DAOFactory.getUtilisateurDAO();
+		try {
+			dao = DAOFactory.createUtilisateurDAO();
+		} catch (SQLException e) {
+	
+			
+		}
 	}
 
 	// singleton
