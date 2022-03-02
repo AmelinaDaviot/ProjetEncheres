@@ -54,8 +54,8 @@ public class InscriptionServlet extends HttpServlet {
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
 
-		//Si creation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
-		response.sendRedirect("/WEB-INF/jsp/accueilNonConnecte.jsp");
+		//Si creation du profil est validee, l'utilisateur est redirige vers la page d'accueil
+		response.sendRedirect(request.getContextPath() + "/accueillir");
 		
 	}
 	// TODO méthode verif mdp = confirmation
