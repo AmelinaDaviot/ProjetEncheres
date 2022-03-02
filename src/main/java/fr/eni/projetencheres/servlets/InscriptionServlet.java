@@ -23,9 +23,8 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**
-		 * Afficher la page inscription
-		 */
+		
+		//Afficher la page inscription
 		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
 		if (rq != null) {
 			rq.forward(request, response);
@@ -39,24 +38,26 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**
-		 * Rï¿½cupï¿½ration des donnï¿½es enregistrï¿½es par l'utilisateur
-		 */
+		
+		//Recuperation des donnees enregistrees par l'utilisateur
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");
 		String rue = request.getParameter("rue");
 		String cpo = request.getParameter("cpo");
 		String ville = request.getParameter("ville");
 		String mdp = request.getParameter("mdp");
-		String confirmation = request.getParameter("confirmation");
+//		String confirmation = request.getParameter("confirmation");
 		
-		/*
-		 * Si crï¿½ation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
-		 */
-		response.sendRedirect("/WEB-INF/jsp/accueilConnecte.jsp");
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
+
+		//Si creation du profil est validï¿½e, l'utilisateur est redirigï¿½ vers la page d'accueil
+		response.sendRedirect("/WEB-INF/jsp/accueilNonConnecte.jsp");
 		
 	}
+	// TODO méthode verif mdp = confirmation
 
 }
