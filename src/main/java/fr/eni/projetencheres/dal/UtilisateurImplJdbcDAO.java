@@ -65,8 +65,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 	
 	/**
-	 * Procédure insertion
-	 * Insérer un nouvel utilisateur (inscription)
+	 * Procï¿½dure insertion
+	 * Insï¿½rer un nouvel utilisateur (inscription)
 	 */
 	@Override
 	public void insert(Utilisateur user) {
