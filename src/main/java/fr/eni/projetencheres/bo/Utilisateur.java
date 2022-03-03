@@ -123,6 +123,18 @@ public class Utilisateur {
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
+	
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
 
 	// Methode toString
 	@Override
@@ -131,5 +143,7 @@ public class Utilisateur {
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + "]";
 	}
+
+	
 
 }
