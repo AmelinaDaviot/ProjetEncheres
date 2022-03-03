@@ -4,30 +4,42 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="css/style.css">
+<!--<link rel="stylesheet" href="css/style.css">-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="css/utilisateur.css">
 <title>Connexion</title>
 </head>
 <body>
+	<div class="container">
 	<header>
 		<h1>Connexion</h1>
 	</header>
 
 	<main>
 		<form action="<%=request.getContextPath()%>/connexion" method="post">
-			<div>
-				<label for="pseudo">Pseudo :</label> <input type="text" id="pseudo"
-					name="pseudo">
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+				  <label for="identifiant">Identifiant :</label>
+				  <input type="text" class="form-control" id="identifiant" placeholder="Pseudo ou Email" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="motDePasse">Mot de passe :</label>
+					<input type="password" class="form-control" id="motDePasse" required>
+				  </div>
 			</div>
 
-			<div>
 
-				<label for="motDePasse">Mot de passe</label> <input type="password"
-					id="motDePasse" name="motDePasse">
-
+			<div class="first-btn">
+				<button type="submit" class="btn btn-primary">Se connecter</button>
+				<a href="<%=request.getContextPath()%>/inscription ">
+					<button type="button" class="btn btn-secondary">Creer un compte</button>
+				</a>
 			</div>
 
-			<button type="submit">Se connecter</button>
+
 		</form>
 	</main>
+</div>
 </body>
 </html>
