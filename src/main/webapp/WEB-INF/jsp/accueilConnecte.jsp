@@ -14,8 +14,11 @@
         </header>
         <nav>
             <form action="" method="post">
+                <div class="profit">
+                    <a href="<%=request.getContextPath()%>/profil">Mon profil></a>
+                </div>
                 <div class="deconnexion">
-                    <a href="<%=request.getContextPath()%>/accueil"><button>Déconnexion</button></a>
+                    <a href="<%=request.getContextPath()%>/accueil">Déconnexion</a>
                 </div>
             </form>
         </nav>
