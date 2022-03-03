@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetencheres.bll.UtilisateurManager;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ModificationCompteServlet
  */
-@WebServlet("/modification-profilt")
+@WebServlet("/modification-profil")
 public class ModificationCompteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,11 +25,10 @@ public class ModificationCompteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		// Suppresion du compte
-		
+		Utilisateur user = null;
 		UtilisateurManager um = UtilisateurManager.getInstance();
-//		um.supprimerCompte();
+		um.supprimerCompte(user.getNoUtilisateur());
 		response.sendRedirect(request.getContextPath() + "/accueillir");
-		
 		
 	}
 
@@ -53,8 +53,9 @@ public class ModificationCompteServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		String confirmation = request.getParameter("confirmation");
 		
+		Utilisateur user = null;
 		UtilisateurManager um = UtilisateurManager.getInstance();
-//		um.modifierCompte();
+		um.modifierCompte(user);
 		response.sendRedirect(request.getContextPath() + "/profil");
 		
 	}
