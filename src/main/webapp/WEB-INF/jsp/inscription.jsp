@@ -21,55 +21,55 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="pseudo">Pseudo :</label>
-                      <input type="text" class="form-control" id="pseudo" placeholder="Votre Pseudo" required>
+                      <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Votre Pseudo" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="nom">Nom :</label>
-                        <input type="text" class="form-control" id="nom" placeholder="Votre Nom" required>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre Nom" required>
                       </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="prenom">Prénom :</label>
-                        <input type="text" class="form-control" id="prenom" placeholder="Votre Prénom" required>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre Prénom" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="email">Email :</label>
-                        <input type="email" class="form-control" id="email" placeholder="exemple@gmail.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com" required>
                       </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="tel">Téléphone :</label>
-                        <input type="tel" class="form-control" id="tel" placeholder="N° de téléphone">
+                        <input type="tel" class="form-control" id="tel" name="tel" placeholder="N° de téléphone">
                       </div>
                       <div class="form-group col-md-6">
                         <label for="rue">Rue :</label>
-                        <input type="text" class="form-control" id="rue" placeholder="ex : 12 impasse Ampère" required>
+                        <input type="text" class="form-control" id="rue" name="rue" placeholder="ex : 12 impasse Ampère" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cpo">Code Postal :</label>
-                        <input type="text" class="form-control" id="cpo" placeholder="ex : 85000" required>
+                        <input type="text" class="form-control" id="cpo" name="cpo" placeholder="ex : 85000" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="ville">Ville :</label>
-                        <input type="email" class="form-control" id="ville" placeholder="ex : La Roche-sur-Yon" required>
+                        <input type="text" class="form-control" id="ville" name="ville" placeholder="ex : La Roche-sur-Yon" required>
                       </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="mdp">Mot de passe :</label>
-                        <input type="password" class="form-control" id="mdp" required>
+                        <input type="password" class="form-control" id="mdp" name="mdp" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirmation">Confirmation :</label>
-                        <input type="password" class="form-control" id="confirmation" required>
+                        <input type="password" class="form-control" id="confirmation" name="confirmation" required>
                     </div>
                 </div>
                 

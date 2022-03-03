@@ -21,11 +21,11 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 				  <label for="identifiant">Identifiant :</label>
-				  <input type="text" class="form-control" id="identifiant" placeholder="Pseudo ou Email" required>
+				  <input type="text" class="form-control" id="identifiant" name="identifiant" placeholder="Pseudo ou Email" required>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="motDePasse">Mot de passe :</label>
-					<input type="password" class="form-control" id="motDePasse" required>
+					<input type="password" class="form-control" id="motDePasse" name="motDePasse" required>
 				  </div>
 			</div>
 
