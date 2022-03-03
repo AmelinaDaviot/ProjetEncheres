@@ -31,14 +31,14 @@ public class UtilisateurManager {
 
 	// methode de verification de connection
 	// TODO Gestion d'erreur
-	public Utilisateur seConnecter(String pseudo, String motDePasse) {
-		Utilisateur user = null;
-		user = dao.seConnecter(pseudo, motDePasse);
+	public Utilisateur seConnecter(String identifiant, String motDePasse) {
+		Utilisateur user = null;	
+		user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
 		return user;
 	}
 
 	/**
-	 * Methode permettant à l'utilisateur de s'inscrire
+	 * Methode permettant ï¿½ l'utilisateur de s'inscrire
 	 * @param pseudo
 	 * @param nom
 	 * @param prenom
@@ -49,7 +49,7 @@ public class UtilisateurManager {
 	 * @param ville
 	 * @param motDePasse
 	 * @param confirmation
-	 * @throws Exception = cas où motDePasse et confirmation ne sont PAS EGAUX
+	 * @throws Exception = cas oï¿½ motDePasse et confirmation ne sont PAS EGAUX
 	 */
 	public void sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws Exception {
@@ -65,7 +65,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Méthode pour modifier le compte de l'utilisateur
+	 * Mï¿½thode pour modifier le compte de l'utilisateur
 	 * @param user
 	 */
 	public void modifierCompte(Utilisateur user) {
@@ -73,7 +73,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Méthode pour supprimer le compte de l'utilisateur
+	 * Mï¿½thode pour supprimer le compte de l'utilisateur
 	 * @param noUtilisateur
 	 */
 	public void supprimerCompte(int noUtilisateur) {

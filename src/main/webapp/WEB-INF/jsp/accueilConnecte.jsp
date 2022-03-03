@@ -17,18 +17,18 @@
         </header>
         <nav>
             <form action="" method="post">
-                <div class="profit">
-                    <a href="<%=request.getContextPath()%>/profil">Mon profil></a>
+                <div class="profil">
+                    <a href="<%=request.getContextPath()%>/profil">Mon profil</a>
                 </div>
                 <div class="deconnexion">
                     <a href="<%=request.getContextPath()%>/accueil">Déconnexion</a>
                 </div>
             </form>
         </nav>
-        <main>    
+        <main> 
+        <body>
         
-        
-     
+        </body>       
         </main>
         <footer></footer>
     </div>

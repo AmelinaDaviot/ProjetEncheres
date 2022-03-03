@@ -14,22 +14,23 @@ import fr.eni.projetencheres.utils.ConnectionProvider;
  */
 public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
-	private final static String SE_CONNECTER = "SELECT *"
-			+ "FROM UTILISATEURS " + "WHERE pseudo = ? AND mot_de_passe = ?";
+	private final static String SE_CONNECTER_PSEUDO = "SELECT * " + "FROM UTILISATEURS "
+			+ "WHERE pseudo = ? AND mot_de_passe = ?";
+
+	private final static String SE_CONNECTER_MAIL = "SELECT * " + "FROM UTILISATEURS "
+			+ "WHERE email = ? AND mot_de_passe = ?";
 
 	private final static String INSERT_NOUVEL_UTILISATEUR = "INSERT INTO UTILISATEURS"
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 100, 0)";
 
 	private final static String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	
+
 	private final static String UPDATE_UTILISATEUR = "UPDATE FROM UTILISATEURS "
 			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, "
-			+ "ville = ?, mot_de_passe = ? "
-			+ "WHERE no_utilisateur = ?";
-	
+			+ "ville = ?, mot_de_passe = ? " + "WHERE no_utilisateur = ?";
+
 	private final static String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
-	
 
 	Connection cnx;
 
@@ -43,11 +44,16 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	 * @return user
 	 */
 	@Override
-	public Utilisateur seConnecter(String pseudo, String mot_de_passe) {
+	public Utilisateur seConnecter(String identifiant, String mot_de_passe, boolean email) {
 		Utilisateur user = null;
 		try {
-			PreparedStatement stmt = cnx.prepareStatement(SE_CONNECTER);
-			stmt.setString(1, pseudo);
+			PreparedStatement stmt = null;
+			if (email) {
+				stmt = cnx.prepareStatement(SE_CONNECTER_MAIL);
+			} else {
+				stmt = cnx.prepareStatement(SE_CONNECTER_PSEUDO);
+			}
+			stmt.setString(1, identifiant);
 			stmt.setString(2, mot_de_passe);
 
 			ResultSet rs = stmt.executeQuery();
@@ -74,7 +80,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	@Override
 	public void insert(Utilisateur user) {
 		try {
-			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR, 
+			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
@@ -87,23 +93,22 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(9, user.getMotDePasse());
 
 			stmt.executeUpdate();
-			
+
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
 				int no_utilisateur = rs.getInt(1);
 				user.setNoUtilisateur(no_utilisateur);
 				stmt.close();
-			}			
-			
+			}
+
 			stmt.close();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
 	/**
 	 * @return user
 	 */
@@ -141,7 +146,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(7, user.getCodePostal());
 			stmt.setString(8, user.getVille());
 			stmt.setString(9, user.getMotDePasse());
-			
+
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {

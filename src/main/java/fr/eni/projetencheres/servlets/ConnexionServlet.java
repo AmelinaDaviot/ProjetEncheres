@@ -47,9 +47,7 @@ public class ConnexionServlet extends HttpServlet {
 		try {
 			Utilisateur user = null;
 			user = um.seConnecter(pseudo, mdp);
-			System.out.println(user.getPseudo());
 			request.setAttribute("utilisateur", user);
-			System.out.println(user.getPseudo());
 			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
 			if (rq != null) {
 				rq.forward(request, response);
