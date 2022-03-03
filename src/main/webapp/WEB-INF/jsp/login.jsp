@@ -13,19 +13,21 @@
 	</header>
 
 	<main>
-		<div>
-			<label for="pseudo">Pseudo :</label> <input type="text"
-				id="pseudo" name="pseudo">
-		</div>
+		<form action="<%=request.getContextPath()%>/connexion" method="post">
+			<div>
+				<label for="pseudo">Pseudo :</label> <input type="text" id="pseudo"
+					name="pseudo">
+			</div>
 
-		<div>
+			<div>
 
-			<label for="motDePasse">Mot de passe</label> <input type="password"
-				id="motDePasse" name="motDePasse">
+				<label for="motDePasse">Mot de passe</label> <input type="password"
+					id="motDePasse" name="motDePasse">
 
-		</div>
+			</div>
 
-		<input type="submit" value="Se connecter">
+			<button type="submit">Se connecter</button>
+		</form>
 	</main>
 </body>
 </html>
