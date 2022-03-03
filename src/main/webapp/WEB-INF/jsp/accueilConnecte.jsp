@@ -1,3 +1,6 @@
+<%@ page import="fr.eni.projetencheres.bo.Utilisateur" %>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +13,9 @@
     <div class="container">
         <header>
             <h1>ACCUEIL</h1>
-            <h2>Bonjour PSEUDO</h2> <!-- request.getAttribute("pseudo") => récupérer le pseudo de la personne -->
+            <% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");%>
+         
+            <h2>Bonjour <%= utilisateur.getPseudo()%></h2>
         </header>
         <nav>
             <form action="" method="post">
@@ -22,7 +27,12 @@
                 </div>
             </form>
         </nav>
-        <main></main>
+        <main>
+        
+        
+        
+     
+        </main>
         <footer></footer>
     </div>
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetencheres.bll.UtilisateurManager;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ConnexionServlet
@@ -38,21 +39,20 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String pseudo = request.getParameter("pseudo");
-		String mdp = request.getParameter("motDePasse");	
-		
+		String mdp = request.getParameter("motDePasse");
+
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			um.seConnecter(pseudo, mdp);
-			
-			
-			//Si creation du profil est validee, l'utilisateur est redirige vers la page d'accueil
+			Utilisateur user = null;
+			user = um.seConnecter(pseudo, mdp);
+			request.setAttribute("utilisateur", user);
 			response.sendRedirect(request.getContextPath() + "/accueilConnecte.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
