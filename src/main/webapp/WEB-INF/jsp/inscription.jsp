@@ -16,12 +16,12 @@
         <main>
             <h2>Mon profil</h2>
             <form action="<%=request.getContextPath() %>/inscription" method="post">
-
-                <div class="form-row">
+		
+              <!--   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="pseudo">Pseudo</label>
                       <input type="text" class="form-control" id="pseudo" placeholder="Pseudo" required="required">
-                    </div>
+                    </div>  -->
 
                 <div class="forms-control">
                     <label for="pseudo">Pseudo :</label>

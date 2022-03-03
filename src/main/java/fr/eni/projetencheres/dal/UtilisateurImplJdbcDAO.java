@@ -61,6 +61,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 				user = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 						rs.getString("code_postal"), rs.getString("ville"), null);
+			} else {
+
 			}
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion");
@@ -76,9 +78,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 	/**
 	 * Procedure insertion Inserer un nouvel utilisateur (inscription)
+	 * @return 
 	 */
 	@Override
-	public void insert(Utilisateur user) {
+	public  Utilisateur insert(Utilisateur user) {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
@@ -96,17 +99,16 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
-				int no_utilisateur = rs.getInt(1);
-				user.setNoUtilisateur(no_utilisateur);
-				stmt.close();
+				user.setNoUtilisateur(rs.getInt(1));
 			}
 
 			stmt.close();
 
 		} catch (SQLException e) {
-			
-			
+
 		}
+		return user;
+
 	}
 
 	/**

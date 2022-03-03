@@ -51,16 +51,18 @@ public class UtilisateurManager {
 	 * @param confirmation
 	 * @throws Exception = cas o� motDePasse et confirmation ne sont PAS EGAUX
 	 */
-	public void sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws Exception {
 		if (motDePasse.equals(confirmation)) {
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 		dao.insert(user);
+		return null; 
 		} else {
 			Exception BLLException = new Exception("mots de passe different");
 			throw BLLException;
 			
-		} 
+		}
+		
 			
 	}
 	
