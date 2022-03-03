@@ -39,7 +39,7 @@ public class UtilisateurManager {
 
 	public void sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws Exception {
-		if (motDePasse == confirmation) {
+		if (motDePasse.equals(confirmation)) {
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 		dao.insert(user);
 		} else {

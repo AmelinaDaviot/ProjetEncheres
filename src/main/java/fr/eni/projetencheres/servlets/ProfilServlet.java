@@ -28,6 +28,11 @@ public class ProfilServlet extends HttpServlet {
 		if (rq != null) {
 			Utilisateur user = null;
 			request.setAttribute("pseudo", user.getPseudo());
+			request.setAttribute("nom", user.getNom());
+			request.setAttribute("prenom", user.getPrenom());
+			request.setAttribute("email", user.getEmail());
+			request.setAttribute("telephone", user.getTelephone());
+			request.setAttribute("pseudo", user.getPseudo());
 			rq.forward(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
