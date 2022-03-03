@@ -4,13 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="css/utilisateur.css">
+<title>Modifier ou Supprimer Profil</title>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>ENI-ENCHERES</h1>
         </header>
+
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <h1>ENI-ENCHERES</h1>
+          </nav>
+
         <main>
             <h2>Mon Profil</h2>
             <form action="<%=request.getContextPath() %>/modification-profil" method="post">
