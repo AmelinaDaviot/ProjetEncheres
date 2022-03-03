@@ -40,13 +40,10 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String pseudo = request.getParameter("pseudo");
-		String mdp = request.getParameter("motDePasse");
-
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
 			Utilisateur user = null;
-			user = um.seConnecter(pseudo, mdp);
+			user = um.seConnecter(request.getParameter("identifiant"),request.getParameter("motDePasse"));
 			request.setAttribute("utilisateur", user);
 			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
 			if (rq != null) {
