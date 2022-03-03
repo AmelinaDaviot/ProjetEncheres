@@ -32,7 +32,7 @@ public class UtilisateurManager {
 	// methode de verification de connection
 	// TODO Gestion d'erreur
 	public Utilisateur seConnecter(String pseudo, String motDePasse) {
-		Utilisateur user;
+		Utilisateur user = null;
 		user = dao.seConnecter(pseudo, motDePasse);
 		return user;
 	}

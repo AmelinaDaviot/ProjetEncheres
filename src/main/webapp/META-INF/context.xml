@@ -10,7 +10,6 @@
 		username="sa"
 		password="Pa$$w0rd"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url="jdbc:sqlserver://10.154.200.17:1433;databasename=ENCHERES_BDD"
-	
+		url="jdbc:sqlserver://10.154.200.17:1433;databasename=ENCHERES_BDD"	
 	/>
 </Context>
