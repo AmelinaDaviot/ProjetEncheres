@@ -14,14 +14,14 @@
 
 	<main>
 		<div>
-			<label for="username">Pseudo :</label> <input type="text"
-				id="username" name="username">
+			<label for="pseudo">Pseudo :</label> <input type="text"
+				id="pseudo" name="pseudo">
 		</div>
 
 		<div>
 
-			<label for="pass">Mot de passe</label> <input type="password"
-				id="pass" name="password">
+			<label for="motDePasse">Mot de passe</label> <input type="password"
+				id="motDePasse" name="motDePasse">
 
 		</div>
 
