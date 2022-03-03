@@ -13,7 +13,7 @@
         </header>
         <main>
             <h2>Mon Profil</h2>
-            <form action="<%=request.getContextPath() %>/inscription" method="post">
+            <form action="<%=request.getContextPath() %>/modification-profil" method="post">
                 <div class="forms-control">
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo">
@@ -61,11 +61,15 @@
                 <div class="forms-control">
                     <label for="prenom">Crédit :</label>
                     <!-- get crédit-->
+                    <%=request.getAttribute("credit") %>
                 </div>
                 <div class="first-btn">
                     <button type="submit">Enregistrer</button>
                 </div>
             </form>
+            <div class="first-btn">
+                    <button type="submit">Supprimer mon compte</button>
+                </div>
         </main>
         <footer></footer>
     </div>
