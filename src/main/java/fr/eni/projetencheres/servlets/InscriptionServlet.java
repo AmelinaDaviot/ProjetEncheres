@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetencheres.bll.UtilisateurManager;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -58,8 +59,9 @@ public class InscriptionServlet extends HttpServlet {
 			//Si creation du profil est validee, l'utilisateur est redirige vers la page d'accueil
 			response.sendRedirect(request.getContextPath() + "/accueillir");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO renvoyer à la page d'inscription si pseudo existant ou email existant + message d'erreur associe
+			
+			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/inscription.jsp");
 		}
 		
 	}

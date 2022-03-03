@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/style.css">
+<!--<link rel="stylesheet" href="css/style.css">-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Inscription</title>
 </head>
 <body>
@@ -15,6 +16,13 @@
         <main>
             <h2>Mon profil</h2>
             <form action="<%=request.getContextPath() %>/inscription" method="post">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="pseudo">Pseudo</label>
+                      <input type="text" class="form-control" id="pseudo" placeholder="Pseudo" required="required">
+                    </div>
+
                 <div class="forms-control">
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo" required="required">
@@ -57,7 +65,7 @@
                 </div>   
                 
                 <div class="first-btn">
-                    <button type="submit">Créer</button>
+                    <button type="submit">Créer</button> 
                     
                 </div>
             </form>
