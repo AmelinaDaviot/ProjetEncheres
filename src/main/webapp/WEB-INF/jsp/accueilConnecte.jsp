@@ -5,16 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="css/utilisateur.css">
 <title>Accueil - Connecté</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>ACCUEIL</h1>
-            <% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");%>
-         
-            <h2>Bonjour <%= utilisateur.getPseudo()%></h2>
+                      
         </header>
+
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <h1>ENI-ENCHERES</h1>
+            <form class="form-inline">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<%=request.getContextPath()%>/profil">Mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/accueil ">Déconnexion</a>
+                    </li>
+                  </ul>
+            </form>
+          </nav>
+
         <nav>
             <form action="" method="post">
                 <div class="profil">
@@ -26,9 +40,9 @@
             </form>
         </nav>
         <main> 
-        <body>
-        
-        </body>       
+            <% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");%>
+         
+            <h2>Bonjour <%= utilisateur.getPseudo()%></h2>       
         </main>
         <footer></footer>
     </div>
