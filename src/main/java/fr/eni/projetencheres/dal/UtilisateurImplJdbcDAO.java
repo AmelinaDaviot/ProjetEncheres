@@ -74,7 +74,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	@Override
 	public void insert(Utilisateur user) {
 		try {
-			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR);
+			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR, 
+					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
 			stmt.setString(3, user.getPrenom());
@@ -86,6 +87,16 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(9, user.getMotDePasse());
 
 			stmt.executeUpdate();
+			
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				int no_utilisateur = rs.getInt(1);
+				user.setNoUtilisateur(no_utilisateur);
+				stmt.close();
+			}			
+			
+			stmt.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,7 +120,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 						rs.getString("code_postal"), rs.getString("ville"), null, rs.getInt("credit"));
 			}
-			
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,6 +143,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(9, user.getMotDePasse());
 			
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,6 +156,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
 			stmt.setInt(1, no_utilisateur);
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
