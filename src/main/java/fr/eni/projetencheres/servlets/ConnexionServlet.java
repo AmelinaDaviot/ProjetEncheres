@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projetencheres.bll.BLLException;
 import fr.eni.projetencheres.bll.UtilisateurManager;
 import fr.eni.projetencheres.bo.Utilisateur;
 
@@ -53,8 +54,13 @@ public class ConnexionServlet extends HttpServlet {
 
 			}
 
-		} catch (Exception e) {
+		} catch (BLLException e) {
 			e.printStackTrace();
+			RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+			if (connexion != null) {
+				request.setAttribute("error", e);
+				connexion.forward(request, response);
+			}
 		}
 
 	}

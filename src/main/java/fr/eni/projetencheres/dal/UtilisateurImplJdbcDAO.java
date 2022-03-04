@@ -62,8 +62,6 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 				user = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 						rs.getString("code_postal"), rs.getString("ville"), null);
-			} else {
-
 			}
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion");
@@ -81,9 +79,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	/**
 	 * Procedure insertion Inserer un nouvel utilisateur (inscription)
 	 * @return 
+	 * @throws DALException 
 	 */
 	@Override
-	public  Utilisateur insert(Utilisateur user) {
+	public  Utilisateur insert(Utilisateur user) throws DALException {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
@@ -107,7 +106,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.close();
 
 		} catch (SQLException e) {
-
+			throw new DALException("Echec de s'inscrire", e);
 		}
 		return user;
 

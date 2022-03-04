@@ -20,6 +20,19 @@
 	  </nav>
 
 	<main>
+	
+	<%
+	if(request.getAttribute("error") != null){
+		Exception error = (Exception) request.getAttribute("error");
+	%>
+	
+	<div class="alert alert-danger" role="alert">
+  		<%= error.getMessage() %>
+	</div>
+
+		
+	<%} %>
+	
 		<form action="<%=request.getContextPath()%>/connexion" method="post">
 
 			<div class="form-row">
