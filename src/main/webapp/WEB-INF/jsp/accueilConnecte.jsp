@@ -36,25 +36,6 @@
                   </ul>
             </form>
           </nav>
-=======
-		<nav class="navbar navbar-light bg-light justify-content-between">
-			<h1>ENI-ENCHERES</h1>
-			<form class="form-inline">
-				<ul class="nav justify-content-end">
-					<li class="nav-item"><a class="nav-link active" href="#">Enchères</a>
-					</li>
-					<li class="nav-item"><a class="nav-link active" href="#">Vendre
-							un article</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="<%=request.getContextPath()%>/profil">Mon profil</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/accueil ">Déconnexion</a></li>
-				</ul>
-			</form>
-		</nav>
->>>>>>> branch 'master' of https://github.com/AmelinaDaviot/ProjetEncheres
-
-
 		<main>
 			
 			<h2>Bonjour ${sessionScope.utilisateur.pseudo}</h2>
