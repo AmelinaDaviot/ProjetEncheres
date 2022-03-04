@@ -83,7 +83,7 @@ public class UtilisateurManager {
 
 			if (!motDePasse.equals(confirmation)) {
 				throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
-						+ "différents !");
+						+ "diffï¿½rents !");
 			} 
 			
 			dao.insert(user);
@@ -92,18 +92,7 @@ public class UtilisateurManager {
 			System.out.println("erreur BLL " + e.getMessage());
 			throw new BLLException(e.getMessage());
 		}
-<<<<<<< HEAD
-		
-=======
 
-		if (motDePasse.equals(confirmation)) {
-		}
-//		else {
-//			Exception BLLException = new Exception("mots de passe different");
-//			throw BLLException;
-//
-//		}
->>>>>>> branch 'master' of https://github.com/AmelinaDaviot/ProjetEncheres
 		return user;
 	}
 

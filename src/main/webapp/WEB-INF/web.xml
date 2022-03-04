@@ -4,14 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 	<display-name>ProjetEncheres</display-name>
-
-<<<<<<< HEAD
-
-		
-
-=======
 	<welcome-file-list>
 		<welcome-file>accueillir</welcome-file>
 	</welcome-file-list>
->>>>>>> branch 'master' of https://github.com/AmelinaDaviot/ProjetEncheres
 </web-app>
