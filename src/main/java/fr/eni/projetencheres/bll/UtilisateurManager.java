@@ -45,6 +45,7 @@ public class UtilisateurManager {
 
 	/**
 	 * Methode permettant � l'utilisateur de s'inscrire
+	 * 
 	 * @param pseudo
 	 * @param nom
 	 * @param prenom
@@ -57,31 +58,40 @@ public class UtilisateurManager {
 	 * @param confirmation
 	 * @throws Exception = cas o� motDePasse et confirmation ne sont PAS EGAUX
 	 */
-	public Utilisateur sInscrire (String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur sInscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws Exception {
 		if (motDePasse.equals(confirmation)) {
-		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-		dao.insert(user);
-		return null; 
+			Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					motDePasse);
+			dao.insert(user);
+			return null;
 		} else {
 			Exception BLLException = new Exception("mots de passe different");
 			throw BLLException;
-			
+
 		}
-		
-			
+
 	}
-	
+
 	/**
 	 * M�thode pour modifier le compte de l'utilisateur
+	 * 
 	 * @param user
+	 * @return 
 	 */
-	public void modifierCompte(Utilisateur user) {
-		dao.update(user);
+	public Utilisateur modifierCompte(Utilisateur user, String confirmation) {
+		if (user.getMotDePasse().equals(confirmation)) {
+			user = dao.update(user);
+			
+		} else {
+//TODO exception BLLEception (mdp et confirm diff)
+		}
+		return user;
 	}
-	
+
 	/**
 	 * M�thode pour supprimer le compte de l'utilisateur
+	 * 
 	 * @param noUtilisateur
 	 */
 	public void supprimerCompte(int noUtilisateur) {

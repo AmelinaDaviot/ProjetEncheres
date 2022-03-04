@@ -27,7 +27,8 @@ public class ModificationCompteServlet extends HttpServlet {
 		// Suppresion du compte
 	
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.supprimerCompte(session.getAttribute("noUtilisateur"));
+		um.supprimerCompte((int)request.getSession().getAttribute("noUtilisateur"));
+		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath() + "/accueillir");
 		
 	}
@@ -53,9 +54,11 @@ public class ModificationCompteServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		String confirmation = request.getParameter("confirmation");
 		
-		Utilisateur user = null;
+		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
+		
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.modifierCompte(user);
+		user = um.modifierCompte(user, confirmation);
+		request.getSession().setAttribute("utilisateur", user);
 		response.sendRedirect(request.getContextPath() + "/profil");
 		
 	}

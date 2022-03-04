@@ -1,3 +1,4 @@
+<%@ page import="fr.eni.projetencheres.bo.Utilisateur" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,7 +41,9 @@
 		<div class="container">
 			<p>
 				Nom :
-				<%=request.getAttribute("nom")%></p>
+				
+				<%=(Utilisateur)request.getSession().getAttribute("user").getNom() %> 
+				<%=  %> </p>
 			<p>
 				Prenom :
 				<%=request.getAttribute("prenom")%></p>

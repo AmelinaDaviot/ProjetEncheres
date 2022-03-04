@@ -6,7 +6,7 @@ public interface UtilisateurDAO {
 	public Utilisateur seConnecter(String pseudo, String mot_de_passe, boolean email) throws DALException;
 	public Utilisateur insert (Utilisateur user);
 	public Utilisateur selectById(int no_utilisateur);
-	public void update (Utilisateur user);
+	public Utilisateur update (Utilisateur user);
 	public void delete(int no_utilisateur);
 
 }
