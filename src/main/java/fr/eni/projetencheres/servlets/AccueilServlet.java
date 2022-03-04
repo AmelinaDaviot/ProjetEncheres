@@ -25,7 +25,7 @@ public class AccueilServlet extends HttpServlet {
 		if (request.getSession().getAttribute("utilisateur") != null) {
 			rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
 		} else {
-			rq = request.getRequestDispatcher("/accueil");
+			rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilNonConnecte.jsp");
 		}
 		if (rq != null) {
 			rq.forward(request, response);
