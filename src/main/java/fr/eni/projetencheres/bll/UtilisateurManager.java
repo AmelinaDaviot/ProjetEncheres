@@ -83,7 +83,7 @@ public class UtilisateurManager {
 
 			if (!motDePasse.equals(confirmation)) {
 				throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
-						+ "différents !");
+						+ "diffï¿½rents !");
 			} 
 			
 			dao.insert(user);
