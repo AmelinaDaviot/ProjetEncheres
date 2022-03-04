@@ -23,14 +23,14 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// Suppresion du compte
-	
+
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.supprimerCompte((int)request.getSession().getAttribute("noUtilisateur"));
+		um.supprimerCompte((int) request.getSession().getAttribute("noUtilisateur"));
 		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath() + "/accueillir");
-		
+
 	}
 
 	/**
@@ -39,28 +39,22 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//Enregistrer les modifications du compte
-		
-		// Recuperation des donnees enregistrees par l'utilisateur
-		String pseudo = request.getParameter("pseudo");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String email = request.getParameter("email");
-		String tel = request.getParameter("tel");
-		String rue = request.getParameter("rue");
-		String cpo = request.getParameter("cpo");
-		String ville = request.getParameter("ville");
-		String mdp = request.getParameter("mdp");
-		String confirmation = request.getParameter("confirmation");
-		
-		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp);
-		
+
+		// Enregistrer les modifications du compte
+
+		// Recuperation des donnees enregistrees par l'utilisateur et création de
+		// l'utilisateur pour l'utilisateur manager
+
+		Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"),
+				request.getParameter("prenom"), request.getParameter("email"), request.getParameter("tel"),
+				request.getParameter("rue"), request.getParameter("cpo"), request.getParameter("ville"),
+				request.getParameter("mdp"));
+
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		user = um.modifierCompte(user, confirmation);
+		user = um.modifierCompte(user, request.getParameter("confirmation"));
 		request.getSession().setAttribute("utilisateur", user);
 		response.sendRedirect(request.getContextPath() + "/profil");
-		
+
 	}
 
 }

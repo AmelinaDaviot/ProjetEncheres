@@ -50,11 +50,9 @@
 	
 
 			<div name="first-btn">
-				<a href="<%=request.getContextPath()%>/modification-profil ">
+				<a href="<%=request.getContextPath()%>/modification-profil">
 					<button type="button" class="btn btn-primary">Modifier</button>
-				</a> <a href="/accueilconnecte">
-					<button type="button" class="btn btn-secondary">Annuler</button>
-				</a>
+				</a> 
 			</div>
 
 		</main>
