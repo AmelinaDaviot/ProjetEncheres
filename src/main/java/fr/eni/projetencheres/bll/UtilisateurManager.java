@@ -32,19 +32,29 @@ public class UtilisateurManager {
 
 	// methode de verification de connection
 	// TODO Gestion d'erreur
+	/**
+	 * 
+	 * @param identifiant
+	 * @param motDePasse
+	 * @return user
+	 * @throws BLLException = echec de connexion (identifiant ou mdp incorrects)
+	 */
 	public Utilisateur seConnecter(String identifiant, String motDePasse) throws BLLException {
 		Utilisateur user = null;	
 		try {
 			user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
+			if (user == null) {
+				//Attraper la DALException et la personnaliser en BLLException
+				throw new BLLException("Echec de la connexion : identifiant ou mot de passe incorrects");
+			}
 		} catch (DALException e) {
-			//Attraper la DALException et la personnaliser en BLLException
-			throw new BLLException("Echec de la connexion", e);
+			throw new BLLException("Echec de la connexion");
 		}
 		return user;
 	}
 
 	/**
-	 * Methode permettant � l'utilisateur de s'inscrire
+	 * Methode permettant a l'utilisateur de s'inscrire
 	 * 
 	 * @param pseudo
 	 * @param nom
@@ -56,21 +66,28 @@ public class UtilisateurManager {
 	 * @param ville
 	 * @param motDePasse
 	 * @param confirmation
-	 * @throws Exception = cas o� motDePasse et confirmation ne sont PAS EGAUX
+	 * @throws BLLException 
+	 * @throws BLLException = cas ou motDePasse et confirmation ne sont PAS EGAUX
 	 */
 	public Utilisateur sInscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, String confirmation) throws Exception {
-		if (motDePasse.equals(confirmation)) {
-			Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
-					motDePasse);
+			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
+		Utilisateur user = null;
+		
+		user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		try {
 			dao.insert(user);
-			return null;
-		} else {
-			Exception BLLException = new Exception("mots de passe different");
-			throw BLLException;
-
+		} catch (DALException e) {
+			throw new BLLException("Echec de l'inscription");
 		}
-
+		
+		if (motDePasse.equals(confirmation)) {
+		} 
+//		else {
+//			Exception BLLException = new Exception("mots de passe different");
+//			throw BLLException;
+//
+//		}
+		return user;
 	}
 
 	/**

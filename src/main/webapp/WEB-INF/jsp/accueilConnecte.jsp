@@ -37,7 +37,7 @@
 
 
         <main> 
-            <% Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");%>
+            <% Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");%>
          
             <h2>Bonjour ${ user.getPseudo()}</h2>       
         </main>
