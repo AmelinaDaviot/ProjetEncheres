@@ -42,9 +42,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	 * Methode seConnecter
 	 * 
 	 * @return user
+	 * @throws DALException = récupérer la violation de la clé unique (pseudo et mail)
 	 */
 	@Override
-	public Utilisateur seConnecter(String identifiant, String mot_de_passe, boolean email) {
+	public Utilisateur seConnecter(String identifiant, String mot_de_passe, boolean email) throws DALException {
 		Utilisateur user = null;
 		try {
 			PreparedStatement stmt = null;
@@ -67,6 +68,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion");
 			e.getMessage();
+			throw new DALException("Echec de se connecter", e);
 		}
 
 		if (user == null) {
