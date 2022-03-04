@@ -37,9 +37,9 @@
 
 
         <main> 
-            <% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");%>
+            <% Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");%>
          
-            <h2>Bonjour <%= utilisateur.getPseudo()%></h2>       
+            <h2>Bonjour ${ user.getPseudo()}</h2>       
         </main>
         <footer></footer>
     </div>
