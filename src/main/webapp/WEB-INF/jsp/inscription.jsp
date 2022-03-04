@@ -16,7 +16,7 @@
         </header>
 
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <h1>ENI-ENCHERES</h1>
+            <a href="<%=request.getContextPath()%>/accueillir" class="text-dark text-decoration-none"> <h1>ENI-ENCHERES</h1></a>
           </nav>
 
         <main>
@@ -95,7 +95,7 @@
                             <button type="submit" class="btn btn-primary">Créer</button> 
                         </div>
                         <div class="col-1">
-                            <a href="<%=request.getContextPath()%>/accueil">
+                            <a href="<%=request.getContextPath()%>/accueillir">
                                 <button type="button" class="btn btn-secondary">Annuler</button>
                             </a>                   
                         </div>

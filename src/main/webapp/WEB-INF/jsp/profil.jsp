@@ -17,7 +17,7 @@
 	<div class="container">
 
 		<nav class="navbar navbar-light bg-light justify-content-between">
-			<h1>ENI-ENCHERES</h1>
+            <a href="<%=request.getContextPath()%>/accueillir" class="text-dark text-decoration-none"> <h1>ENI-ENCHERES</h1></a>
 		</nav>
 
 		<main>
@@ -48,13 +48,14 @@
 
 
 	
-
+	<!--"<%=request.getContextPath()%>/modification-profil"-->
 			<div name="first-btn">
-				<a href="<%=request.getContextPath()%>/modification-profil">
-					<button type="button" class="btn btn-primary">Modifier</button>
-				</a> 
+				
+					<form method="post" action="<%=request.getContextPath()%>/modification-profil">
+						<button type="submit" class="btn btn-primary">Modifier</button></form>
+				
 			</div>
-
+		
 		</main>
 
 
