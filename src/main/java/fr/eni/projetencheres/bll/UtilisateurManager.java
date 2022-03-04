@@ -3,6 +3,7 @@ package fr.eni.projetencheres.bll;
 import java.sql.SQLException;
 
 import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
 import fr.eni.projetencheres.dal.UtilisateurDAO;
 
@@ -31,9 +32,14 @@ public class UtilisateurManager {
 
 	// methode de verification de connection
 	// TODO Gestion d'erreur
-	public Utilisateur seConnecter(String identifiant, String motDePasse) {
-		Utilisateur user = null;
-		user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
+	public Utilisateur seConnecter(String identifiant, String motDePasse) throws BLLException {
+		Utilisateur user = null;	
+		try {
+			user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
+		} catch (DALException e) {
+			//Attraper la DALException et la personnaliser en BLLException
+			throw new BLLException("Echec de la connexion", e);
+		}
 		return user;
 	}
 
