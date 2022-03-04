@@ -25,9 +25,9 @@ public class ModificationCompteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		// Suppresion du compte
-		Utilisateur user = null;
+	
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.supprimerCompte(user.getNoUtilisateur());
+		um.supprimerCompte(session.getAttribute("noUtilisateur"));
 		response.sendRedirect(request.getContextPath() + "/accueillir");
 		
 	}

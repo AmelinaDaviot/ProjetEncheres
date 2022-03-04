@@ -15,16 +15,6 @@
 	<servlet-mapping>
 		<servlet-name>Accueil</servlet-name>
 		<url-pattern>/accueil</url-pattern>
-	</servlet-mapping>
-	
-
-	<servlet>
-		<servlet-name>AccueilConnecte</servlet-name>
-		<jsp-file>/WEB-INF/jsp/accueilConnecte.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AccueilConnecte</servlet-name>
-		<url-pattern>/accueilconnecte</url-pattern>
-	</servlet-mapping>		
+	</servlet-mapping>	
 
 </web-app>
