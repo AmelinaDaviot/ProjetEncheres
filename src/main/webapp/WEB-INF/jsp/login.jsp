@@ -16,8 +16,8 @@
 	</header>
 
 	<nav class="navbar navbar-light bg-light justify-content-between">
-		<h1>ENI-ENCHERES</h1>
-	  </nav>
+		<a href="<%=request.getContextPath()%>/accueillir" class="text-dark text-decoration-none"> <h1>ENI-ENCHERES</h1></a>
+	</nav>
 
 	<main>
 	
