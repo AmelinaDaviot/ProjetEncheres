@@ -22,17 +22,17 @@
         <main>
             <h2>Mon profil</h2>
             <form action="<%=request.getContextPath() %>/inscription" method="post">
-
+            
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <label for="pseudo">Pseudo :</label>
-                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Votre Pseudo" required>                   
-                     </div>
+                        <label for="prenom">Pseudo :</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre Pseudo" required>
+                    </div>
                     <div class="col-4">
                         <label for="nom">Nom :</label>
-                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre Nom" required>  
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre Nom" required>
                     </div>
-            
+                </div>
 
                 <div class="row justify-content-center">
                     <div class="col-4">
@@ -79,14 +79,21 @@
                 </div>
                 
                 <div class="first-btn">
-                    <button type="submit" class="btn btn-primary">Créer</button> 
-                
-                    <a href="<%=request.getContextPath()%>/accueil"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                    <div class="row justify-content-center">
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary">Créer</button> 
+                        </div>
+                        <div class="col-1">
+                            <a href="<%=request.getContextPath()%>/accueil">
+                                <button type="button" class="btn btn-secondary">Annuler</button>
+                            </a>                   
+                        </div>
+                    </div>
                 </div>
 
             </form>
-            
         </main>
+        
         <footer></footer>
     </div>
 

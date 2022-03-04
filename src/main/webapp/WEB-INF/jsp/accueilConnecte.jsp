@@ -20,6 +20,12 @@
             <form class="form-inline">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
+                        <a class="nav-link active" href="#">Enchères</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Vendre un article</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="<%=request.getContextPath()%>/profil">Mon profil</a>
                     </li>
                     <li class="nav-item">
@@ -29,16 +35,7 @@
             </form>
           </nav>
 
-        <nav>
-            <form action="" method="post">
-                <div class="profil">
-                    <a href="<%=request.getContextPath()%>/profil">Mon profil</a>
-                </div>
-                <div class="deconnexion">
-                    <a href="<%=request.getContextPath()%>/accueil">Déconnexion</a>
-                </div>
-            </form>
-        </nav>
+
         <main> 
             <% Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");%>
          
