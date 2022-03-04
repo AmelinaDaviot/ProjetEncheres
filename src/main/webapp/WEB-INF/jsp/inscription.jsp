@@ -21,12 +21,23 @@
 
         <main>
             <h2>Mon profil</h2>
-            <form action="<%=request.getContextPath() %>/inscription" method="post">
+
+			<%
+			if(request.getAttribute("error") != null){
+				Exception error = (Exception) request.getAttribute("error");
+			%>
+
+			<div class="alert alert-danger" role="alert">
+				<%= error.getMessage() %>
+			</div>
+			<%} %>
+
+			<form action="<%=request.getContextPath() %>/inscription" method="post">
             
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <label for="prenom">Pseudo :</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Votre Pseudo" required>
+                        <label for="pseudo">Pseudo :</label>
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Votre Pseudo" required>
                     </div>
                     <div class="col-4">
                         <label for="nom">Nom :</label>

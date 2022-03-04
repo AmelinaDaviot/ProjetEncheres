@@ -40,11 +40,11 @@ public class UtilisateurManager {
 	 * @throws BLLException = echec de connexion (identifiant ou mdp incorrects)
 	 */
 	public Utilisateur seConnecter(String identifiant, String motDePasse) throws BLLException {
-		Utilisateur user = null;	
+		Utilisateur user = null;
 		try {
 			user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
 			if (user == null) {
-				//Attraper la DALException et la personnaliser en BLLException
+				// Attraper la DALException et la personnaliser en BLLException
 				throw new BLLException("Echec de la connexion : identifiant ou mot de passe incorrects");
 			}
 		} catch (DALException e) {
@@ -66,27 +66,28 @@ public class UtilisateurManager {
 	 * @param ville
 	 * @param motDePasse
 	 * @param confirmation
-	 * @throws BLLException 
-	 * @throws BLLException = cas ou motDePasse et confirmation ne sont PAS EGAUX
+	 * @throws BLLException = cas ou pseudo ou email deja existants
 	 */
 	public Utilisateur sInscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 		Utilisateur user = null;
 		
 		user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-		try {
+		
+		try {			
+
+			if (!motDePasse.equals(confirmation)) {
+				throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
+						+ "différents !");
+			} 
+			
 			dao.insert(user);
+			
 		} catch (DALException e) {
-			throw new BLLException("Echec de l'inscription");
+			System.out.println("erreur BLL " + e.getMessage());
+			throw new BLLException(e.getMessage());
 		}
 		
-		if (motDePasse.equals(confirmation)) {
-		} 
-//		else {
-//			Exception BLLException = new Exception("mots de passe different");
-//			throw BLLException;
-//
-//		}
 		return user;
 	}
 
@@ -94,12 +95,12 @@ public class UtilisateurManager {
 	 * Mï¿½thode pour modifier le compte de l'utilisateur
 	 * 
 	 * @param user
-	 * @return 
+	 * @return
 	 */
 	public Utilisateur modifierCompte(Utilisateur user, String confirmation) {
 		if (user.getMotDePasse().equals(confirmation)) {
 			user = dao.update(user);
-			
+
 		} else {
 //TODO exception BLLEception (mdp et confirm diff)
 		}

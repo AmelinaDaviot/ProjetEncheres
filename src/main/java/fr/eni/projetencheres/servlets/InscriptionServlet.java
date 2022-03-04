@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.eni.projetencheres.bll.BLLException;
 import fr.eni.projetencheres.bll.UtilisateurManager;
 import fr.eni.projetencheres.bo.Utilisateur;
 
@@ -44,33 +46,36 @@ public class InscriptionServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Recuperation des donnees enregistrees par l'utilisateur
-		/*
-		 * String pseudo = request.getParameter("pseudo"); String nom =
-		 * request.getParameter("nom"); String prenom = request.getParameter("prenom");
-		 * String email = request.getParameter("email"); String tel =
-		 * request.getParameter("tel"); String rue = request.getParameter("rue"); String
-		 * cpo = request.getParameter("cpo"); String ville =
-		 * request.getParameter("ville"); String mdp = request.getParameter("mdp");
-		 * String confirmation = request.getParameter("confirmation");
-		 */
-
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			um.sInscrire(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"),
+			Utilisateur user = um.sInscrire(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"),
 					request.getParameter("email"), request.getParameter("tel"), request.getParameter("rue"),
 					request.getParameter("cpo"), request.getParameter("ville"), request.getParameter("mdp"),
 					request.getParameter("confirmation"));
-			// um.sInscrire(pseudo, nom, prenom, email, tel, rue, cpo, ville, mdp,
-			// confirmation);
 
+			request.getSession().setAttribute("utilisateur", user);
 			// Si creation du profil est validee, l'utilisateur est redirige vers la page
 			// d'accueil
 			response.sendRedirect(request.getContextPath() + "/accueillir");
-		} catch (Exception e) {
-			// TODO renvoyer � la page d'inscription si pseudo existant ou email existant +
+//			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
+//			if (rq != null) {			
+//				rq.forward(request, response);
+//			} else {
+//				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//			}
+			
+		} catch (BLLException e) {
+			// TODO renvoyer a la page d'inscription si pseudo existant ou email existant +
 			// message d'erreur associe
-
-			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/inscription.jsp");
+			
+			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+			if (rq != null) {
+				request.setAttribute("error", e);
+				rq.forward(request, response);
+			} else {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			}
+//			response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/inscription.jsp");
 		}
 
 	}

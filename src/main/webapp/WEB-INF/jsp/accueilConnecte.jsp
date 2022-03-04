@@ -29,7 +29,7 @@
                         <a class="nav-link active" href="<%=request.getContextPath()%>/profil">Mon profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/accueil ">Déconnexion</a>
+                        <a class="nav-link" href="<%=request.getContextPath()%>/deconnexion ">Déconnexion</a>
                     </li>
                   </ul>
             </form>

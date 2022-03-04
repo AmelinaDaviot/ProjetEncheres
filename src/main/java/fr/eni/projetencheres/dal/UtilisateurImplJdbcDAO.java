@@ -20,7 +20,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	private final static String SE_CONNECTER_MAIL = "SELECT * " + "FROM UTILISATEURS "
 			+ "WHERE email = ? AND mot_de_passe = ?";
 
-	private final static String INSERT_NOUVEL_UTILISATEUR = "INSERT INTO UTILISATEURS"
+	private final static String INSERT_NOUVEL_UTILISATEUR = "INSERT INTO UTILISATEURS "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 100, 0)";
 
@@ -86,6 +86,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
+			System.out.println(user.toString());
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
 			stmt.setString(3, user.getPrenom());
@@ -106,7 +107,16 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.close();
 
 		} catch (SQLException e) {
-			throw new DALException("Echec de s'inscrire", e);
+			System.out.println("erreur" + e.getMessage());
+			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
+				System.out.println("erreur pseudo");
+				throw new DALException("Echec de l'inscription : pseudo déjà utilisé !");
+			}
+			if (e.getMessage().contains("UQ_utilisateurs_email")) {
+				System.out.println("erreur email");
+				throw new DALException("Echec de l'inscription : adresse mail déjà utilisée !");
+			}
+			throw new DALException("Echec de l'inscription : " + e.getMessage());
 		}
 		return user;
 

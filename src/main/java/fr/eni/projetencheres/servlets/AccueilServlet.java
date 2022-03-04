@@ -21,9 +21,14 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rq = request.getRequestDispatcher("/accueil");
+		RequestDispatcher rq = null;
+		if (request.getSession().getAttribute("utilisateur") != null) {
+			rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
+		} else {
+			rq = request.getRequestDispatcher("/accueil");
+		}
 		if (rq != null) {
-		rq.forward(request, response);
+			rq.forward(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
