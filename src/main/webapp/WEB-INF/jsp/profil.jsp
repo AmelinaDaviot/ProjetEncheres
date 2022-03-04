@@ -4,14 +4,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>profil</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="css/utilisateur.css">
+<title>Mon profil</title>
 </head>
 <body>
+	<div class="container">
+
+		<nav class="navbar navbar-light bg-light justify-content-between">
+            <h1>ENI-ENCHERES</h1>
+          </nav>
+		
+		<main>
+
+			
+			<div name="first-btn">
+				<a href="<%=request.getContextPath()%>/modification-profil ">
+					<button type="button" class="btn btn-primary">Modifier</button>
+				</a>
+				
+				<a href="/accueilconnecte">
+					<button type="button" class="btn btn-secondary">Annuler</button>
+				</a>  
+            </div>
+
+		</main>
+		 
+
+	</div>
 	<!-- <header>
 		Bonjour
 		<%=request.getAttribute("pseudo")%></header>
 
-	<main>
+
 		<div class="container">
 			<p>
 				Nom :
@@ -36,13 +61,7 @@
 				<%=request.getAttribute("ville")%></p>
 		</div> -->
 
-		<div name="modifier">
-			<a href="<%=request.getContextPath()%>/modifier ">
-				<button>Modifier</button>
-			</a>
-
-		</div>
-	</main>
+	
 
 </body>
 </html>
