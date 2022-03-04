@@ -103,12 +103,12 @@ public class UtilisateurManager {
 	 * @return
 	 */
 	public Utilisateur modifierCompte(Utilisateur user, String confirmation) {
-		if (user.getMotDePasse().equals(confirmation)) {
-			user = dao.update(user);
 
-		} else {
-//TODO exception BLLEception (mdp et confirm diff)
-		}
+			user = dao.update(user);
+//			if (user.getMotDePasse().equals(confirmation)) {
+//		} else {
+////TODO exception BLLEception (mdp et confirm diff)
+//		}
 		return user;
 	}
 

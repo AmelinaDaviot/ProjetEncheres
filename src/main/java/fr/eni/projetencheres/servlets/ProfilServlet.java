@@ -45,7 +45,13 @@ public class ProfilServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+//		response.sendRedirect(request.getContextPath() + "/modification-profil");
+		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/modification-supression-profil.jsp");
+		if (rq != null) {
+			rq.forward(request, response);
+		} else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 }
