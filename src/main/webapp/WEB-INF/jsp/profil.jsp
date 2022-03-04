@@ -13,7 +13,7 @@
 <title>Mon profil</title>
 </head>
 <body>
-	
+
 	<div class="container">
 
 		<nav class="navbar navbar-light bg-light justify-content-between">
@@ -23,9 +23,22 @@
 		<main>
 			Bonjour : ${sessionScope.utilisateur.pseudo}
 
-			<div class="container">
-				<p>Nom :${sessionScope.utilisateur.nom}</p>
-				<p>Prenom :${sessionScope.utilisateur.prenom}</p>
+			
+				<div class="row justify-content-center">
+					<div class="col-6">
+						Nom :
+						<p class="text-center" >${sessionScope.utilisateur.nom}</p>
+
+					</div>
+					
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-6">
+
+						<p class = "info">Prenom :${sessionScope.utilisateur.prenom}</p>
+					</div>
+				</div>
+
 				<p>Email :${sessionScope.utilisateur.email}</p>
 				<p>Telephone :${sessionScope.utilisateur.telephone}</p>
 				<p>Rue :${sessionScope.utilisateur.rue}</p>
@@ -33,7 +46,8 @@
 				<p>Ville :${sessionScope.utilisateur.ville}</p>
 				<p>Credit :${sessionScope.utilisateur.credit}</p>
 
-			</div>
+
+	
 
 			<div name="first-btn">
 				<a href="<%=request.getContextPath()%>/modification-profil ">

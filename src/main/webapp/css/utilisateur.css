@@ -19,3 +19,7 @@ main h2{
 .form-group {
     margin: 10px;
 }
+
+p.info {
+    text-align: center;
+}
