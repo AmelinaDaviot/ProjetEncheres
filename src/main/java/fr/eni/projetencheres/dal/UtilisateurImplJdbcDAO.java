@@ -136,7 +136,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 
 	@Override
-	public void update(Utilisateur user) {
+	public Utilisateur update(Utilisateur user) {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
 			stmt.setString(1, user.getPseudo());
@@ -151,10 +151,12 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 			stmt.executeUpdate();
 			stmt.close();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block (coder exceptions)
 			e.printStackTrace();
 		}
+		return user;
 	}
 
 	@Override

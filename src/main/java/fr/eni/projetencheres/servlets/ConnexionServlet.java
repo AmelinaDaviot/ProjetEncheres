@@ -45,20 +45,10 @@ public class ConnexionServlet extends HttpServlet {
 		try {
 			Utilisateur user = null;
 			user = um.seConnecter(request.getParameter("identifiant"), request.getParameter("motDePasse"));
-			request.setAttribute("utilisateur", user);
 			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
 			if (rq != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("pseudo", user.getPseudo());
-				session.setAttribute("nom", user.getNom());
-				session.setAttribute("prenom", user.getPrenom());
-				session.setAttribute("email", user.getEmail());
-				session.setAttribute("telephone", user.getTelephone());
-				session.setAttribute("rue", user.getRue());
-				session.setAttribute("codePostal", user.getCodePostal());
-				session.setAttribute("ville", user.getVille());
-				session.setAttribute("credit", user.getCredit());
-				session.setAttribute("noUtilisateur", user.getNoUtilisateur());
+				session.setAttribute("utilisateur", user);				
 				rq.forward(request, response);
 
 			}
