@@ -51,7 +51,6 @@ public class ConnexionServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("utilisateur", user);				
 				rq.forward(request, response);
-
 			}
 
 		} catch (BLLException e) {
