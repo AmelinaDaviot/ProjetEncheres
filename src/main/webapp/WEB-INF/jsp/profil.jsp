@@ -1,4 +1,3 @@
-<%@ page import="fr.eni.projetencheres.bo.Utilisateur"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,9 +13,7 @@
 <title>Mon profil</title>
 </head>
 <body>
-	<%
-	Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
-	%>
+	
 	<div class="container">
 
 		<nav class="navbar navbar-light bg-light justify-content-between">
@@ -24,7 +21,19 @@
 		</nav>
 
 		<main>
-			Bonjour ${user.pseudo}
+			Bonjour : ${sessionScope.utilisateur.pseudo}
+
+			<div class="container">
+				<p>Nom :${sessionScope.utilisateur.nom}</p>
+				<p>Prenom :${sessionScope.utilisateur.prenom}</p>
+				<p>Email :${sessionScope.utilisateur.email}</p>
+				<p>Telephone :${sessionScope.utilisateur.telephone}</p>
+				<p>Rue :${sessionScope.utilisateur.rue}</p>
+				<p>Code postal :${sessionScope.utilisateur.codePostal}</p>
+				<p>Ville :${sessionScope.utilisateur.ville}</p>
+				<p>Credit :${sessionScope.utilisateur.credit}</p>
+
+			</div>
 
 			<div name="first-btn">
 				<a href="<%=request.getContextPath()%>/modification-profil ">
