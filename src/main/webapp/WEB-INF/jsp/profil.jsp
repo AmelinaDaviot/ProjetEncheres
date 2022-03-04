@@ -7,7 +7,7 @@
 <title>profil</title>
 </head>
 <body>
-	<header>
+	<!-- <header>
 		Bonjour
 		<%=request.getAttribute("pseudo")%></header>
 
@@ -34,7 +34,7 @@
 			<p>
 				Ville :
 				<%=request.getAttribute("ville")%></p>
-		</div>
+		</div> -->
 
 		<div name="modifier">
 			<a href="<%=request.getContextPath()%>/modifier ">
