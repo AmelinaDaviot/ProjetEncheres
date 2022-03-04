@@ -42,8 +42,8 @@
 			<p>
 				Nom :
 				
-				<%=(Utilisateur)request.getSession().getAttribute("user").getNom() %> 
-				<%=  %> </p>
+				<%= Utilisateur user = (Utilisateur)request.getSession().getAttribute("user") %> 
+				 </p>
 			<p>
 				Prenom :
 				<%=request.getAttribute("prenom")%></p>
