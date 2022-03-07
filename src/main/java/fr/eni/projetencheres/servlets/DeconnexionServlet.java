@@ -22,8 +22,7 @@ public class DeconnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getSession().invalidate();
-				
+		request.getSession().invalidate();				
 		RequestDispatcher connexion = request.getRequestDispatcher("/accueillir");
 		if (connexion != null) {
 			connexion.forward(request, response);
