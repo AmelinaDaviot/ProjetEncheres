@@ -42,7 +42,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	 * Methode seConnecter
 	 * 
 	 * @return user
-	 * @throws DALException = récupérer la violation de la clé unique (pseudo et mail)
+	 * @throws DALException = rï¿½cupï¿½rer la violation de la clï¿½ unique (pseudo et mail)
 	 */
 	@Override
 	public Utilisateur seConnecter(String identifiant, String mot_de_passe, boolean email) throws DALException {
@@ -61,7 +61,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			if (rs.next()) {
 				user = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-						rs.getString("code_postal"), rs.getString("ville"), null);
+						rs.getString("code_postal"), rs.getString("ville"), null, rs.getInt("credit"));
 			}
 		} catch (SQLException e) {
 			System.out.println("Erreur de connexion");
@@ -110,11 +110,11 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			System.out.println("erreur" + e.getMessage());
 			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
 				System.out.println("erreur pseudo");
-				throw new DALException("Echec de l'inscription : pseudo déjà utilisé !");
+				throw new DALException("Echec de l'inscription : pseudo dï¿½jï¿½ utilisï¿½ !");
 			}
 			if (e.getMessage().contains("UQ_utilisateurs_email")) {
 				System.out.println("erreur email");
-				throw new DALException("Echec de l'inscription : adresse mail déjà utilisée !");
+				throw new DALException("Echec de l'inscription : adresse mail dï¿½jï¿½ utilisï¿½e !");
 			}
 			throw new DALException("Echec de l'inscription : " + e.getMessage());
 		}
@@ -147,7 +147,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur update(Utilisateur user) {
+	public Utilisateur update(Utilisateur user, String confirmation) {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
 			stmt.setString(1, user.getPseudo());
