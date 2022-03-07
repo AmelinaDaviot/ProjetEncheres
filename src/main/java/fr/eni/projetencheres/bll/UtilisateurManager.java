@@ -126,6 +126,7 @@ public class UtilisateurManager {
 	 */
 	public void supprimerCompte(int noUtilisateur) {
 		dao.delete(noUtilisateur);
+		System.out.println("test suppression BLL");
 	}
 
 }
