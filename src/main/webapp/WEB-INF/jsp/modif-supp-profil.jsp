@@ -11,7 +11,6 @@
 <body>
     <div class="container">
         <header>
-            <h1>ENI-ENCHERES</h1>
         </header>
 
         <nav class="navbar navbar-light bg-light justify-content-between">
@@ -59,16 +58,15 @@
                 </div>
                 <div class="forms-control">
                     <label for="new-mdp">Nouveau mot de passe :</label>
-                    <input type="password" id="new-mdp" name="new-mdp" required="required">
+                    <input type="password" id="new-mdp" name="new-mdp">
                 </div>
                 <div class="forms-control">
                     <label for="confirmation">Confirmation :</label>
-                    <input type="password" id="confirmation" name="confirmation" required="required">
+                    <input type="password" id="confirmation" name="confirmation">
                 </div>   
                 <div class="forms-control">
                     <label for="prenom">Crédit :</label>
-                    <!-- get crédit-->
-                    <%=request.getAttribute("credit") %>
+                    ${sessionScope.utilisateur.credit}
                 </div>
                 <div class="first-btn">
                     <button type="submit">Enregistrer</button>

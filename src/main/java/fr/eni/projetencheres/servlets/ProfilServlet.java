@@ -46,7 +46,7 @@ public class ProfilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //		response.sendRedirect(request.getContextPath() + "/modification-profil");
-		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/modification-supression-profil.jsp");
+		RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/modif-supp-profil.jsp");
 		if (rq != null) {
 			rq.forward(request, response);
 		} else {

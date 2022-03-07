@@ -51,7 +51,7 @@
 	<!--"<%=request.getContextPath()%>/modification-profil"-->
 			<div name="first-btn">
 				
-					<form action="<%=request.getContextPath()%>/modification-profil" method="post">
+					<form action="<%=request.getContextPath()%>/profil" method="post">
 						<button type="submit" class="btn btn-primary">Modifier</button></form>
 				
 			</div>
