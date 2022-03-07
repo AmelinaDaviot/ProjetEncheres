@@ -25,11 +25,11 @@ public class ArticleManager {
 	}
 
 	public Article vendre(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, char etatVente, String image) {
+			int prixInitial, int noUtilisateur, int noCategorie, char etatVente, String image) {
 		Article art = null;
 
-		art = new Article(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, prixInitial,
-				prixVente, etatVente, image);
+		art = new Article(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, noUtilisateur,
+				noCategorie, etatVente, image);
 
 		return art;
 

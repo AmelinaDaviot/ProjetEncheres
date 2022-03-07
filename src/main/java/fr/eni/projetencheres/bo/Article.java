@@ -37,6 +37,19 @@ public class Article {
 				etatVente, image);
 		this.noArticle = noArticle;
 	}
+	
+	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int prixInitial, int noUtilisateur, int noCategorie, char etatVente, String image) {
+		this.nom = nom;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+		this.etatVente = etatVente;
+		this.image = image;
+	}
 
 	// GETTERS ET SETTERS
 	

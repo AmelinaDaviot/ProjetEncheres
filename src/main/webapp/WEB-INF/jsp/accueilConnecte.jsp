@@ -24,7 +24,7 @@
                         <a class="nav-link active" href="#">Enchères</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Vendre un article</a>
+                        <a class="nav-link active" href="<%=request.getContextPath() %>/vendre-article">Vendre un article</a>
                     </li>
                     <li class="nav-item">
                     	<a class="nav-link active text-dark" >Crédit : ${sessionScope.utilisateur.credit}</a>
