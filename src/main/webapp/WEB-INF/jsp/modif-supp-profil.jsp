@@ -71,6 +71,7 @@
                 <div class="first-btn">
                     <button type="submit">Enregistrer</button>
                 </div>
+              
             </form>
             <form action="<%=request.getContextPath() %>/modification-profil" method="get">
             	<div class="first-btn">
