@@ -72,9 +72,11 @@
                     <button type="submit">Enregistrer</button>
                 </div>
             </form>
-            <div class="first-btn">
+            <form action="<%=request.getContextPath() %>/modification-profil" method="get">
+            	<div class="first-btn">
                     <button type="submit">Supprimer mon compte</button>
                 </div>
+               </form>
         </main>
         <footer></footer>
     </div>
