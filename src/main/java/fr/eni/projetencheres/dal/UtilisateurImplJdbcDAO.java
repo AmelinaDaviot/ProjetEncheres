@@ -102,6 +102,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(9, user.getMotDePasse());
 
 			stmt.executeUpdate();
+			
+			user.setCredit(100);
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
@@ -114,11 +116,11 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			System.out.println("erreur" + e.getMessage());
 			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
 				System.out.println("erreur pseudo");
-				throw new DALException("Echec de l'inscription : pseudo dï¿½jï¿½ utilisï¿½ !");
+				throw new DALException("Echec de l'inscription : pseudo déjà utilisé !");
 			}
 			if (e.getMessage().contains("UQ_utilisateurs_email")) {
 				System.out.println("erreur email");
-				throw new DALException("Echec de l'inscription : adresse mail dï¿½jï¿½ utilisï¿½e !");
+				throw new DALException("Echec de l'inscription : adresse mail déjà utilisée !");
 			}
 			throw new DALException("Echec de l'inscription : " + e.getMessage());
 		}
