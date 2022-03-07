@@ -96,9 +96,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(7, user.getCodePostal());
 			stmt.setString(8, user.getVille());
 			stmt.setString(9, user.getMotDePasse());
-			stmt.setInt(10, user.getCredit());
 
 			stmt.executeUpdate();
+			
+			user.setCredit(100);
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
