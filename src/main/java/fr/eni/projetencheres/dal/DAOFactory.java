@@ -7,4 +7,8 @@ public class DAOFactory {
 	public static UtilisateurDAO createUtilisateurDAO() throws SQLException {
 		return new UtilisateurImplJdbcDAO();
 	}
+	
+	public static ArticleDAO createArticleDAO() {
+		return new ArticleImplJdbcDAO();
+	}
 }
