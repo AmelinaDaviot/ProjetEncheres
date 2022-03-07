@@ -71,6 +71,7 @@
                 <div class="first-btn">
                     <button type="submit">Enregistrer</button>
                 </div>
+              
             </form>
             <div class="first-btn">
                     <button type="submit">Supprimer mon compte</button>

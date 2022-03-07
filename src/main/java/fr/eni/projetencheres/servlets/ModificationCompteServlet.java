@@ -46,7 +46,7 @@ public class ModificationCompteServlet extends HttpServlet {
 		// Recuperation des donnees enregistrees par l'utilisateur et création de
 		// l'utilisateur pour l'utilisateur manager
 
-		Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"),
+		Utilisateur user = new Utilisateur((int)request.getSession().getAttribute("noUtilisateur") ,request.getParameter("pseudo"), request.getParameter("nom"),
 				request.getParameter("prenom"), request.getParameter("email"), request.getParameter("tel"),
 				request.getParameter("rue"), request.getParameter("cpo"), request.getParameter("ville"),
 				request.getParameter("new-mdp"));

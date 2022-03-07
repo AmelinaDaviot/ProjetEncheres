@@ -32,7 +32,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, "
 			+ "ville = ?, mot_de_passe = ? " + "WHERE no_utilisateur = ?";
 
-	private final static String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private final static String DELETE_UTILISATEUR = "DELETE * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	Connection cnx;
 
@@ -100,9 +100,9 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(7, user.getCodePostal());
 			stmt.setString(8, user.getVille());
 			stmt.setString(9, user.getMotDePasse());
-
-			stmt.executeUpdate();
 			
+			stmt.executeUpdate();
+
 			user.setCredit(100);
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -116,11 +116,11 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			System.out.println("erreur" + e.getMessage());
 			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
 				System.out.println("erreur pseudo");
-				throw new DALException("Echec de l'inscription : pseudo déjà utilisé !");
+				throw new DALException("Echec de l'inscription : pseudo dï¿½jï¿½ utilisï¿½ !");
 			}
 			if (e.getMessage().contains("UQ_utilisateurs_email")) {
 				System.out.println("erreur email");
-				throw new DALException("Echec de l'inscription : adresse mail déjà utilisée !");
+				throw new DALException("Echec de l'inscription : adresse mail dï¿½jï¿½ utilisï¿½e !");
 			}
 			throw new DALException("Echec de l'inscription : " + e.getMessage());
 		}
@@ -156,7 +156,6 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	public Utilisateur update(Utilisateur user, String mdpActuel) throws DALException {
 		ResultSet rs = null;
 		try {
-
 			PreparedStatement stmt = cnx.prepareStatement(SELECT_MDP_BY_ID);
 			stmt.setInt(1, user.getNoUtilisateur());
 			rs = stmt.executeQuery();
@@ -174,17 +173,19 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 					stmt.setString(7, user.getCodePostal());
 					stmt.setString(8, user.getVille());
 					stmt.setString(9, user.getMotDePasse());
+					stmt.setInt(10, user.getNoUtilisateur());
+					
 
 					stmt.executeUpdate();
 				} else {
 					throw new DALException("Erreur de mise a jour du profil : mot de passe actuel incorrect");
 				}
-				
+
 			}
 			stmt.close();
 
 		} catch (SQLException e) {
-			throw new DALException ("Erreur lors de la mise a jour du profil : " + e.getMessage());
+			throw new DALException("Erreur lors de la mise a jour du profil : " + e.getMessage());
 		}
 		return user;
 	}
