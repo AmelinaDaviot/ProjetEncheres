@@ -28,9 +28,9 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 	private final static String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
-	private final static String UPDATE_UTILISATEUR = "UPDATE FROM UTILISATEURS "
-			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, "
-			+ "ville = ?, mot_de_passe = ? " + "WHERE no_utilisateur = ?";
+	private final static String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS "
+			+ "SET pseudo = '?', nom = '?', prenom = '?', email = '?', telephone = '?', rue = '?', code_postal = '?', "
+			+ "ville = '?', mot_de_passe = '?' " + "WHERE no_utilisateur = ?";
 
 	private final static String DELETE_UTILISATEUR = "DELETE * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
@@ -90,7 +90,6 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			System.out.println(user.toString());
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
 			stmt.setString(3, user.getPrenom());
@@ -159,30 +158,32 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			PreparedStatement stmt = cnx.prepareStatement(SELECT_MDP_BY_ID);
 			stmt.setInt(1, user.getNoUtilisateur());
 			rs = stmt.executeQuery();
+			stmt.close();
 			if (rs.next()) {
 				String mdpBDD = rs.getString("mot_de_passe");
 				if (mdpBDD.equals(mdpActuel)) {
 
-					stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
-					stmt.setString(1, user.getPseudo());
-					stmt.setString(2, user.getNom());
-					stmt.setString(3, user.getPrenom());
-					stmt.setString(4, user.getEmail());
-					stmt.setString(5, user.getTelephone());
-					stmt.setString(6, user.getRue());
-					stmt.setString(7, user.getCodePostal());
-					stmt.setString(8, user.getVille());
-					stmt.setString(9, user.getMotDePasse());
-					stmt.setInt(10, user.getNoUtilisateur());
+					PreparedStatement stmt2 = cnx.prepareStatement(UPDATE_UTILISATEUR);
+					stmt2.setString(1, user.getPseudo());
+					stmt2.setString(2, user.getNom());
+					stmt2.setString(3, user.getPrenom());
+					stmt2.setString(4, user.getEmail());
+					stmt2.setString(5, user.getTelephone());
+					stmt2.setString(6, user.getRue());
+					stmt2.setString(7, user.getCodePostal());
+					stmt2.setString(8, user.getVille());
+					stmt2.setString(9, user.getMotDePasse());
+					stmt2.setInt(10, user.getNoUtilisateur());
 					
 
-					stmt.executeUpdate();
+					stmt2.executeUpdate();
+					stmt2.close();
 				} else {
 					throw new DALException("Erreur de mise a jour du profil : mot de passe actuel incorrect");
 				}
 
 			}
-			stmt.close();
+			
 
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de la mise a jour du profil : " + e.getMessage());

@@ -65,29 +65,28 @@ public class UtilisateurManager {
 	 * @param codePostal
 	 * @param ville
 	 * @param motDePasse
-	 * @param confirmation
-<<<<<<< HEAD
-	 * @throws BLLException = cas ou pseudo ou email deja existants
-=======
+	 * @param confirmation <<<<<<< HEAD
+	 * @throws BLLException = cas ou pseudo ou email deja existants =======
 	 * @throws BLLException
 	 * @throws BLLException = cas ou motDePasse et confirmation ne sont PAS EGAUX
->>>>>>> branch 'master' of https://github.com/AmelinaDaviot/ProjetEncheres
+	 *                      >>>>>>> branch 'master' of
+	 *                      https://github.com/AmelinaDaviot/ProjetEncheres
 	 */
 	public Utilisateur sInscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 		Utilisateur user = null;
 
 		user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-		
-		try {			
+
+		try {
 
 			if (!motDePasse.equals(confirmation)) {
-				throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
-						+ "diff�rents !");
-			} 
-			
+				throw new BLLException(
+						"Echec de l'inscription : le mot de passe et la confirmation sont " + "diff�rents !");
+			}
+
 			dao.insert(user);
-			
+
 		} catch (DALException e) {
 			System.out.println("erreur BLL " + e.getMessage());
 			throw new BLLException(e.getMessage());
@@ -97,26 +96,36 @@ public class UtilisateurManager {
 	}
 
 	/**
-	 * M�thode pour modifier le compte de l'utilisateur
-	 * verifie si le nouveau mdp et la confriamtion sont égaux
-	 * si oui : fait la requete de mise a jour
-	 * si non : souleve et propage une BLLException
+	 * M�thode pour modifier le compte de l'utilisateur verifie si le nouveau mdp et
+	 * la confriamtion sont égaux si oui : fait la requete de mise a jour si non :
+	 * souleve et propage une BLLException
+	 * 
 	 * @param user, confirmation
 	 * @return user
-	 * @throws BLLException 
+	 * @throws BLLException
 	 */
 	public Utilisateur modifierCompte(Utilisateur user, String confirmation, String mdpActuel) throws BLLException {
 		if (user.getMotDePasse().equals(confirmation)) {
 			try {
-				user = dao.update(user, mdpActuel);
-			} catch (DALException e) {
-				throw new BLLException(e.getMessage());
-			}		
+				user = modifierCompte(user, mdpActuel);
+			} catch (BLLException e) {
+				throw e;
+			}
 		} else {
-			throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
-				+ "différents !");
+			throw new BLLException(
+					"Echec de l'inscription : le mot de passe et la confirmation sont " + "différents !");
 		}
 		return user;
+	}
+
+	public Utilisateur modifierCompte(Utilisateur user, String mdpActuel) throws BLLException {
+		try {
+			user = dao.update(user, mdpActuel);
+		} catch (DALException e) {
+			throw new BLLException(e.getMessage());
+		}
+		return user;
+
 	}
 
 	/**

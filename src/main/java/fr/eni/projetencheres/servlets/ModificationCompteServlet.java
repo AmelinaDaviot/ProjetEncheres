@@ -1,6 +1,8 @@
 package fr.eni.projetencheres.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,14 +26,6 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Suppresion du compte
-
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.supprimerCompte((int) request.getSession().getAttribute("noUtilisateur"));
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath() + "/accueillir");
-
 	}
 
 	/**
@@ -40,83 +34,79 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if (request.getParameter("action").equals("MODIF")) {
 
-		// Enregistrer les modifications du compte
+			// Enregistrer les modifications du compte
+			// Recuperation des donnees enregistrees par l'utilisateur et création de
+			// l'utilisateur pour l'utilisateur manager
 
-		// Recuperation des donnees enregistrees par l'utilisateur et création de
-		// l'utilisateur pour l'utilisateur manager
-		String pseudo = null;
-		String nom = null;
-		String prenom = null;
-		String email = null;
-		String tel = null;
-		String rue = null;
-		String cpo = null;
-		String ville = null;
-		String newMDP = null;
+			UtilisateurManager um = UtilisateurManager.getInstance();
 
-		if (request.getParameter("pseudo").trim().isEmpty() || request.getParameter("pseudo") == null) {
-			pseudo = (String) request.getSession().getAttribute("pseudo");
+			Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+
+			if (!(request.getParameter("pseudo").trim().isEmpty() || request.getParameter("pseudo") == null)) {
+				user.setPseudo((String) request.getParameter("pseudo"));
+			}
+
+			if (!(request.getParameter("nom").trim().isEmpty() || request.getParameter("nom") == null)) {
+				user.setNom((String) request.getParameter("nom"));
+			}
+
+			if (!(request.getParameter("prenom").trim().isEmpty() || request.getParameter("prenom") == null)) {
+				user.setPrenom((String) request.getParameter("prenom"));
+			}
+
+			if (!(request.getParameter("email").trim().isEmpty() || request.getParameter("email") == null)) {
+				user.setEmail((String) request.getParameter("email"));
+			}
+
+			if (!(request.getParameter("tel").trim().isEmpty() || request.getParameter("tel") == null)) {
+				user.setTelephone((String) request.getParameter("tel"));
+			}
+
+			if (!(request.getParameter("rue").trim().isEmpty() || request.getParameter("rue") == null)) {
+				user.setRue((String) request.getParameter("rue"));
+			}
+
+			if (!(request.getParameter("cpo").trim().isEmpty() || request.getParameter("cpo") == null)) {
+				user.setCodePostal((String) request.getParameter("cpo"));
+			}
+
+			if (!(request.getParameter("ville").trim().isEmpty() || request.getParameter("ville") == null)) {
+				user.setVille((String) request.getParameter("ville"));
+			}
+
+			if (request.getParameter("new-mdp").trim().isEmpty() || request.getParameter("new-mdp") == null) {
+				try {
+					user = um.modifierCompte(user, request.getParameter("mdp"));
+				} catch (BLLException e) {
+					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					if (connexion != null) {
+						request.setAttribute("error", e);
+						connexion.forward(request, response);
+					}
+				}
+			} else {
+				user.setMotDePasse(request.getAttribute("new-mdp").toString());
+				try {
+					user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
+				} catch (BLLException e) {
+					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					if (connexion != null) {
+						request.setAttribute("error", e);
+						connexion.forward(request, response);
+					}
+				}
+				request.getSession().setAttribute("utilisateur", user);
+				response.sendRedirect(request.getContextPath() + "/profil");
+			}
+			// Suppresion du compte
 		} else {
-			pseudo = request.getParameter("pseudo");
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			um.supprimerCompte(Integer.valueOf(request.getSession().getAttribute("noUtilisateur").toString()));
+			request.getSession().invalidate();
+			response.sendRedirect(request.getContextPath() + "/accueillir");
 		}
-
-		if (request.getParameter("nom").trim().isEmpty() || request.getParameter("nom") == null) {
-			nom = (String) request.getSession().getAttribute("nom");
-		} else {
-			nom = request.getParameter("nom");
-		}
-
-		if (request.getParameter("prenom").trim().isEmpty() || request.getParameter("prenom") == null) {
-			prenom = (String) request.getSession().getAttribute("prenom");
-		} else {
-			prenom = request.getParameter("prenom");
-		}
-
-		if (request.getParameter("email").trim().isEmpty() || request.getParameter("email") == null) {
-			email = (String) request.getSession().getAttribute("email");
-		} else {
-			email = request.getParameter("email");
-		}
-
-		if (request.getParameter("tel").trim().isEmpty() || request.getParameter("tel") == null) {
-			tel = (String) request.getSession().getAttribute("tel");
-		} else {
-			tel = request.getParameter("tel");
-		}
-
-		if (request.getParameter("rue").trim().isEmpty() || request.getParameter("rue") == null) {
-			rue = (String) request.getSession().getAttribute("rue");
-		} else {
-			rue = request.getParameter("rue");
-		}
-		if (request.getParameter("cpo").trim().isEmpty() || request.getParameter("cpo") == null) {
-			cpo = (String) request.getSession().getAttribute("cpo");
-		} else {
-			cpo = request.getParameter("cpo");
-		}
-		if (request.getParameter("ville").trim().isEmpty() || request.getParameter("ville") == null) {
-			ville = (String) request.getSession().getAttribute("ville");
-		} else {
-			ville = request.getParameter("ville");
-		}
-		if (request.getParameter("newMDP").trim().isEmpty() || request.getParameter("newMDP") == null) {
-			newMDP = (String) request.getSession().getAttribute("newMDP");
-		} else {
-			newMDP = request.getParameter("newMDP");
-		}
-
-		Utilisateur user = new Utilisateur((int) request.getSession().getAttribute("noUtilisateur"), pseudo, nom,
-				prenom, email, tel, rue, cpo, ville, newMDP);
-
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		try {
-			user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
-		} catch (BLLException e) {
-			e.printStackTrace();
-		}
-		request.getSession().setAttribute("utilisateur", user);
-		response.sendRedirect(request.getContextPath() + "/profil");
 
 	}
 
