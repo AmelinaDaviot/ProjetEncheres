@@ -1,6 +1,8 @@
 package fr.eni.projetencheres.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,14 +26,6 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Suppresion du compte
-
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		um.supprimerCompte((int) request.getSession().getAttribute("noUtilisateur"));
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath() + "/accueillir");
-
 	}
 
 	/**
@@ -40,25 +34,79 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if (request.getParameter("action").equals("MODIF")) {
 
-		// Enregistrer les modifications du compte
+			// Enregistrer les modifications du compte
+			// Recuperation des donnees enregistrees par l'utilisateur et création de
+			// l'utilisateur pour l'utilisateur manager
 
-		// Recuperation des donnees enregistrees par l'utilisateur et création de
-		// l'utilisateur pour l'utilisateur manager
+			UtilisateurManager um = UtilisateurManager.getInstance();
 
-		Utilisateur user = new Utilisateur((int)request.getSession().getAttribute("noUtilisateur") ,request.getParameter("pseudo"), request.getParameter("nom"),
-				request.getParameter("prenom"), request.getParameter("email"), request.getParameter("tel"),
-				request.getParameter("rue"), request.getParameter("cpo"), request.getParameter("ville"),
-				request.getParameter("new-mdp"));
+			Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		try {
-			user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
-		} catch (BLLException e) {
-			e.printStackTrace();
+			if (!(request.getParameter("pseudo").trim().isEmpty() || request.getParameter("pseudo") == null)) {
+				user.setPseudo((String) request.getParameter("pseudo"));
+			}
+
+			if (!(request.getParameter("nom").trim().isEmpty() || request.getParameter("nom") == null)) {
+				user.setNom((String) request.getParameter("nom"));
+			}
+
+			if (!(request.getParameter("prenom").trim().isEmpty() || request.getParameter("prenom") == null)) {
+				user.setPrenom((String) request.getParameter("prenom"));
+			}
+
+			if (!(request.getParameter("email").trim().isEmpty() || request.getParameter("email") == null)) {
+				user.setEmail((String) request.getParameter("email"));
+			}
+
+			if (!(request.getParameter("tel").trim().isEmpty() || request.getParameter("tel") == null)) {
+				user.setTelephone((String) request.getParameter("tel"));
+			}
+
+			if (!(request.getParameter("rue").trim().isEmpty() || request.getParameter("rue") == null)) {
+				user.setRue((String) request.getParameter("rue"));
+			}
+
+			if (!(request.getParameter("cpo").trim().isEmpty() || request.getParameter("cpo") == null)) {
+				user.setCodePostal((String) request.getParameter("cpo"));
+			}
+
+			if (!(request.getParameter("ville").trim().isEmpty() || request.getParameter("ville") == null)) {
+				user.setVille((String) request.getParameter("ville"));
+			}
+
+			if (request.getParameter("new-mdp").trim().isEmpty() || request.getParameter("new-mdp") == null) {
+				try {
+					user = um.modifierCompte(user, request.getParameter("mdp"));
+				} catch (BLLException e) {
+					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					if (connexion != null) {
+						request.setAttribute("error", e);
+						connexion.forward(request, response);
+					}
+				}
+			} else {
+				user.setMotDePasse(request.getAttribute("new-mdp").toString());
+				try {
+					user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
+				} catch (BLLException e) {
+					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					if (connexion != null) {
+						request.setAttribute("error", e);
+						connexion.forward(request, response);
+					}
+				}
+				request.getSession().setAttribute("utilisateur", user);
+				response.sendRedirect(request.getContextPath() + "/profil");
+			}
+			// Suppresion du compte
+		} else {
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			um.supprimerCompte(Integer.valueOf(request.getSession().getAttribute("noUtilisateur").toString()));
+			request.getSession().invalidate();
+			response.sendRedirect(request.getContextPath() + "/accueillir");
 		}
-		request.getSession().setAttribute("utilisateur", user);
-		response.sendRedirect(request.getContextPath() + "/profil");
 
 	}
 
