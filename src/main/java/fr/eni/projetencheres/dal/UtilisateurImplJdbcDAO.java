@@ -196,6 +196,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
 			stmt.setInt(1, no_utilisateur);
 			stmt.executeUpdate();
+			System.out.println("exécution suppresion");
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
