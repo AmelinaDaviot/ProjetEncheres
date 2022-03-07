@@ -49,11 +49,11 @@ public class ModificationCompteServlet extends HttpServlet {
 		Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"),
 				request.getParameter("prenom"), request.getParameter("email"), request.getParameter("tel"),
 				request.getParameter("rue"), request.getParameter("cpo"), request.getParameter("ville"),
-				request.getParameter("mdp"));
+				request.getParameter("new-mdp"));
 
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			user = um.modifierCompte(user, request.getParameter("confirmation"));
+			user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}

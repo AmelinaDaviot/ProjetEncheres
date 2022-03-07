@@ -24,6 +24,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 100, 0)";
 
+	private final static String SELECT_MDP_BY_ID = "SELECT mot_de_passe FROM UTILISATEURS WHERE no_utilisateur = ?";
+
 	private final static String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	private final static String UPDATE_UTILISATEUR = "UPDATE FROM UTILISATEURS "
@@ -42,7 +44,8 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	 * Methode seConnecter
 	 * 
 	 * @return user
-	 * @throws DALException = r�cup�rer la violation de la cl� unique (pseudo et mail)
+	 * @throws DALException = r�cup�rer la violation de la cl� unique (pseudo et
+	 *                      mail)
 	 */
 	@Override
 	public Utilisateur seConnecter(String identifiant, String mot_de_passe, boolean email) throws DALException {
@@ -78,11 +81,12 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 	/**
 	 * Procedure insertion Inserer un nouvel utilisateur (inscription)
-	 * @return 
-	 * @throws DALException 
+	 * 
+	 * @return
+	 * @throws DALException
 	 */
 	@Override
-	public  Utilisateur insert(Utilisateur user) throws DALException {
+	public Utilisateur insert(Utilisateur user) throws DALException {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
@@ -147,25 +151,38 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur update(Utilisateur user) {
+	public Utilisateur update(Utilisateur user, String mdpActuel) throws DALException {
+		ResultSet rs = null;
 		try {
-			PreparedStatement stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
-			stmt.setString(1, user.getPseudo());
-			stmt.setString(2, user.getNom());
-			stmt.setString(3, user.getPrenom());
-			stmt.setString(4, user.getEmail());
-			stmt.setString(5, user.getTelephone());
-			stmt.setString(6, user.getRue());
-			stmt.setString(7, user.getCodePostal());
-			stmt.setString(8, user.getVille());
-			stmt.setString(9, user.getMotDePasse());
 
-			stmt.executeUpdate();
+			PreparedStatement stmt = cnx.prepareStatement(SELECT_MDP_BY_ID);
+			stmt.setInt(1, user.getNoUtilisateur());
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				String mdpBDD = rs.getString("mot_de_passe");
+				if (mdpBDD.equals(mdpActuel)) {
+
+					stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
+					stmt.setString(1, user.getPseudo());
+					stmt.setString(2, user.getNom());
+					stmt.setString(3, user.getPrenom());
+					stmt.setString(4, user.getEmail());
+					stmt.setString(5, user.getTelephone());
+					stmt.setString(6, user.getRue());
+					stmt.setString(7, user.getCodePostal());
+					stmt.setString(8, user.getVille());
+					stmt.setString(9, user.getMotDePasse());
+
+					stmt.executeUpdate();
+				} else {
+					throw new DALException("Erreur de mise a jour du profil : mot de passe actuel incorrect");
+				}
+				
+			}
 			stmt.close();
-			
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block (coder exceptions)
-			e.printStackTrace();
+			throw new DALException ("Erreur lors de la mise a jour du profil : " + e.getMessage());
 		}
 		return user;
 	}

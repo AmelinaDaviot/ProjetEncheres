@@ -51,7 +51,7 @@
 	<!--"<%=request.getContextPath()%>/modification-profil"-->
 			<div name="first-btn">
 				
-					<form method="post" action="<%=request.getContextPath()%>/modification-profil">
+					<form action="<%=request.getContextPath()%>/modification-profil" method="post">
 						<button type="submit" class="btn btn-primary">Modifier</button></form>
 				
 			</div>
@@ -60,35 +60,5 @@
 
 
 	</div>
-
-
-
-	<!-- 		<div class="container">
-			<p>
-				Nom :
-			
-				 </p>
-			<p>
-				Prenom :
-				<%=request.getAttribute("prenom")%></p>
-			<p>
-				Email :
-				<%=request.getAttribute("email")%></p>
-			<p>
-				Téléphone :
-				<%=request.getAttribute("telephone")%></p>
-			<p>
-				Rue :
-				<%=request.getAttribute("rue")%></p>
-			<p>
-				Code postal :
-				<%=request.getAttribute("codePostal")%></p>
-			<p>
-				Ville :
-				<%=request.getAttribute("ville")%></p>
-		</div> -->
-
-
-
 </body>
 </html>

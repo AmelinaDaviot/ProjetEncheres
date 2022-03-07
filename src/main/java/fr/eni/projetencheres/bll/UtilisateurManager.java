@@ -105,12 +105,16 @@ public class UtilisateurManager {
 	 * @return user
 	 * @throws BLLException 
 	 */
-	public Utilisateur modifierCompte(Utilisateur user, String confirmation) throws BLLException {
+	public Utilisateur modifierCompte(Utilisateur user, String confirmation, String mdpActuel) throws BLLException {
 		if (user.getMotDePasse().equals(confirmation)) {
-			user = dao.update(user);		
+			try {
+				user = dao.update(user, mdpActuel);
+			} catch (DALException e) {
+				throw new BLLException(e.getMessage());
+			}		
 		} else {
 			throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
-				+ "diff�rents !");
+				+ "différents !");
 		}
 		return user;
 	}
