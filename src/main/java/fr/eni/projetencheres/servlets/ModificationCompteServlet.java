@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetencheres.bll.BLLException;
 import fr.eni.projetencheres.bll.UtilisateurManager;
 import fr.eni.projetencheres.bo.Utilisateur;
 
@@ -51,7 +52,11 @@ public class ModificationCompteServlet extends HttpServlet {
 				request.getParameter("mdp"));
 
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		user = um.modifierCompte(user, request.getParameter("confirmation"));
+		try {
+			user = um.modifierCompte(user, request.getParameter("confirmation"));
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		request.getSession().setAttribute("utilisateur", user);
 		response.sendRedirect(request.getContextPath() + "/profil");
 

@@ -98,17 +98,20 @@ public class UtilisateurManager {
 
 	/**
 	 * M�thode pour modifier le compte de l'utilisateur
-	 * 
-	 * @param user
-	 * @return
+	 * verifie si le nouveau mdp et la confriamtion sont égaux
+	 * si oui : fait la requete de mise a jour
+	 * si non : souleve et propage une BLLException
+	 * @param user, confirmation
+	 * @return user
+	 * @throws BLLException 
 	 */
-	public Utilisateur modifierCompte(Utilisateur user, String confirmation) {
-
-			user = dao.update(user);
-//			if (user.getMotDePasse().equals(confirmation)) {
-//		} else {
-////TODO exception BLLEception (mdp et confirm diff)
-//		}
+	public Utilisateur modifierCompte(Utilisateur user, String confirmation) throws BLLException {
+		if (user.getMotDePasse().equals(confirmation)) {
+			user = dao.update(user);		
+		} else {
+			throw new BLLException("Echec de l'inscription : le mot de passe et la confirmation sont "
+				+ "diff�rents !");
+		}
 		return user;
 	}
 

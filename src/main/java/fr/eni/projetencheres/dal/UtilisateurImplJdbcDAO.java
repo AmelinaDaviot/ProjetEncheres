@@ -147,7 +147,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur update(Utilisateur user, String confirmation) {
+	public Utilisateur update(Utilisateur user) {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
 			stmt.setString(1, user.getPseudo());
