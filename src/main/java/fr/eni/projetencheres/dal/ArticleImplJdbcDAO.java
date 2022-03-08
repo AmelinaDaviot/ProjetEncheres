@@ -14,6 +14,11 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 			+ "etat_vente, image) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	
+	private final static String SELECT_ARTICLE = "SELECT ARTICLES_VENDUS.*, CATEGORIES.* "
+			+ "FROM ARTICLES_VENDUS INNER JOIN CATEGORIES "
+			+ "ON ARTICLES_VENDUS.no_article = CATEGORIES.no_categorie "
+			+ "WHERE ARTICLES_VENDUS.no_categorie = ?";
+	
 	Connection cnx;
 	
 	@Override
