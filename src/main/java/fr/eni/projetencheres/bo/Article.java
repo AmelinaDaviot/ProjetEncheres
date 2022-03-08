@@ -12,19 +12,20 @@ public class Article {
 	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-//	private int noUtilisateur;
-//	private int noCategorie;
+
+	private int noUtilisateur;
+	private int noCategorie;
 
 	private Utilisateur user;
 	private Categorie c;
 	private Retrait r;
 
-	private char etatVente;
+	private String etatVente;
 	private String image;
 
 	// CONSTRUCTEURS
 	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, char etatVente, String image) {
+			int prixInitial, int prixVente, String etatVente, String image) {
 		this.nom = nom;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
@@ -36,12 +37,21 @@ public class Article {
 	}
 
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, char etatVente, String image) {
+			int prixInitial, int prixVente, String etatVente, String image) {
 		this(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, etatVente, image);
 		this.noArticle = noArticle;
 	}
 
+	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int prixInitial, String image) {
+		this(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixInitial, description, image);
+	}
+
 	// GETTERS ET SETTERS
+	public int getNoArticle() {
+		return noArticle;
+	}
+
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
@@ -94,11 +104,11 @@ public class Article {
 		this.prixVente = prixVente;
 	}
 
-	public char getEtatVente() {
+	public String getEtatVente() {
 		return etatVente;
 	}
 
-	public void setEtatVente(char etatVente) {
+	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
 
@@ -110,30 +120,37 @@ public class Article {
 		this.image = image;
 	}
 
-	// METHODE TO_STRING
-	@Override
-	public String toString() {
-		return "Article [noArticle=" + noArticle + ", nom=" + nom + ", description=" + description
-				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", user=" + user + ", cat=" + cat + ", etatVente="
-				+ etatVente + ", image=" + image + "]";
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
+//	public void setNoUtilisateur(int noUtilisateur) {
+//		this.noUtilisateur = noUtilisateur;
+//	}
+
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+//	public void setNoCategorie(int noCategorie) {
+//		this.noCategorie = noCategorie;
+//	}
+
+	// METHODE TO_STRING
+
 	// METHODES SET
-	
 	public void setRetrait(Retrait r) {
-		// TODO Auto-generated method stub
-		
+		r = new Retrait(r.getRue(), r.getCodePostal(), r.getVille());
+		this.r = r;
 	}
 
 	public void setCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		
+		c = new Categorie(c.getNoCategorie(), c.getLibelle());
+		this.c = c;
 	}
 
-	public void setVendeur(Utilisateur user2) {
-		// TODO Auto-generated method stub
-		
+	public void setVendeur(Utilisateur user) {
+		this.noUtilisateur = user.getNoUtilisateur();
 	}
 
 }

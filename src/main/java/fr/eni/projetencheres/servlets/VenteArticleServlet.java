@@ -43,12 +43,10 @@ public class VenteArticleServlet extends HttpServlet {
 		// INFOS ARTICLE
 		String nom = request.getParameter("nom");
 		String description = request.getParameter("description");
-		
 		String image = request.getParameter("image");
-		String prix = request.getParameter("prix");
+		int prix = Integer.valueOf(request.getParameter("prix"));
 		LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
 		LocalDate finEnchere = LocalDate.parse(request.getParameter("finEnchere"));
-		
 		
 		// INFOS CATEGORIE
 		String cat = request.getParameter("categorie");
@@ -65,9 +63,10 @@ public class VenteArticleServlet extends HttpServlet {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		
 		ArticleManager am = ArticleManager.getInstance();
+		Article a = am.vendre(nom, description, codeCategorie, libelle, image, prix, debutEnchere, finEnchere, 
+				rue, cpo, ville, user);
 		
-		am.vendre(nom, description, codeCategorie, libelle, image, prix, debutEnchere, finEnchere, rue, cpo, ville, user);
-		
+		response.sendRedirect(request.getContextPath() + "/accueillir");
 		
 	}
 
