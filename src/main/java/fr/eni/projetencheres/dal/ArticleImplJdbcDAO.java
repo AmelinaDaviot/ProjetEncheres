@@ -59,6 +59,7 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 			}
 			stmt.close();
 		} catch (SQLException e) {
+			System.out.println("Ca marche pas : " + e.getMessage());
 			throw new DALException("Erreur de mise en vente : " + e.getMessage());
 		}
 		return art;
