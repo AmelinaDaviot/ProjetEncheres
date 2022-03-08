@@ -140,13 +140,11 @@ public class Article {
 
 	// METHODES SET
 	public void setRetrait(Retrait r) {
-		r = new Retrait(r.getRue(), r.getCodePostal(), r.getVille());
-		this.r = r;
+		this.r = new Retrait(r.getRue(), r.getCodePostal(), r.getVille());
 	}
 
 	public void setCategorie(Categorie c) {
-		c = new Categorie(c.getNoCategorie(), c.getLibelle());
-		this.c = c;
+		this.c = new Categorie(c.getNoCategorie(), c.getLibelle());
 	}
 
 	public void setVendeur(Utilisateur user) {

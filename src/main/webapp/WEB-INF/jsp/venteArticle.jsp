@@ -41,7 +41,7 @@
 			<form action="<%=request.getContextPath()%>/vendre-article"
 				method="post">
 
-				<img src="..." alt="..." class="img-thumbnail">
+			<!--	<img src="..." alt="..." class="img-thumbnail">-->
 
 				<div class="row justify-content-center">
 					<div class="col-4">
@@ -71,7 +71,7 @@
 							<option value="1:informatique">Informatique</option>
 							<option value="2:ameublement">Ameublement</option>
 							<option value="3:vetement">Vêtement</option>
-							<option value="4:sport & loirsir">Sport & Loisir</option>
+							<option value="4:sport & loisir">Sport & Loisir</option>
 						</select>
 					</div>
 					</div>
