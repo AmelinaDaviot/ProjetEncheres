@@ -97,9 +97,10 @@ public class ModificationCompteServlet extends HttpServlet {
 						connexion.forward(request, response);
 					}
 				}
-				request.getSession().setAttribute("utilisateur", user);
-				response.sendRedirect(request.getContextPath() + "/profil");
+
 			}
+			request.getSession().setAttribute("utilisateur", user);
+			response.sendRedirect(request.getContextPath() + "/profil");
 			// Suppresion du compte
 		} else {
 			UtilisateurManager um = UtilisateurManager.getInstance();
