@@ -41,6 +41,8 @@
 			<form action="<%=request.getContextPath()%>/vendre-article"
 				method="post">
 
+				<img src="..." alt="..." class="img-thumbnail">
+
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="nom">Article :</label> <input type="text"
@@ -57,29 +59,21 @@
 							required></textarea>
 					</div>
 				</div>
-				<div class="row justify-content-center">
-					<div class="col-4">
-						<label for="etatVente">Etat :</label>
-						<select class="form-control" id="etatVente" name="etatVente" required>
-							<option selected></option>
-							<option value="1">CR</option>
-							<option value="2">EC</option>
-							<option value="3">VD</option>
-							<option value="4">RT</option>
-						</select>
-					</div>
-				</div>
 
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<label for="categorie">Catégorie :</label>
-						<select class="form-control" id="categorie" name="categorie" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="categorie">Catégorie :</label>
+						</div>
+						<select class="custom-select" id="categorie" name="categorie" required>
 							<option selected></option>
 							<option value="1">Informatique</option>
 							<option value="2">Ameublement</option>
 							<option value="3">Vêtement</option>
 							<option value="4">Sport & Loisir</option>
 						</select>
+					</div>
 					</div>
 				</div>
 
