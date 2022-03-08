@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Article {
 
+	// ATTRIBUTS
 	private int noArticle;
 	private String nom;
 	private String description;
@@ -11,48 +12,40 @@ public class Article {
 	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-	private int noUtilisateur;
-	private int noCategorie;
+//	private int noUtilisateur;
+//	private int noCategorie;
+
+	private Utilisateur user;
+	private Categorie c;
+	private Retrait r;
+
 	private char etatVente;
 	private String image;
 
 	// CONSTRUCTEURS
 	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, char etatVente, String image) {
+			int prixInitial, int prixVente, char etatVente, String image) {
 		this.nom = nom;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
 		this.dateFinEnchere = dateFinEnchere;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.noUtilisateur = noUtilisateur;
-		this.noCategorie = noCategorie;
 		this.etatVente = etatVente;
 		this.image = image;
 	}
 
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int prixVente, int noUtilisateur, int noCategorie, char etatVente, String image) {
-		this(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie,
-				etatVente, image);
+			int prixInitial, int prixVente, char etatVente, String image) {
+		this(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, etatVente, image);
 		this.noArticle = noArticle;
-	}
-	
-	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int prixInitial, int noUtilisateur, int noCategorie, char etatVente, String image) {
-		this.nom = nom;
-		this.description = description;
-		this.dateDebutEnchere = dateDebutEnchere;
-		this.dateFinEnchere = dateFinEnchere;
-		this.prixInitial = prixInitial;
-		this.noUtilisateur = noUtilisateur;
-		this.noCategorie = noCategorie;
-		this.etatVente = etatVente;
-		this.image = image;
 	}
 
 	// GETTERS ET SETTERS
-	
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -101,22 +94,6 @@ public class Article {
 		this.prixVente = prixVente;
 	}
 
-	public int getNoUtilisateur() {
-		return noUtilisateur;
-	}
-
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
-	}
-
-	public int getNoCategorie() {
-		return noCategorie;
-	}
-
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
-	}
-
 	public char getEtatVente() {
 		return etatVente;
 	}
@@ -133,18 +110,30 @@ public class Article {
 		this.image = image;
 	}
 
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
-	}
-
-	// METHODE TOSTRING
-	
+	// METHODE TO_STRING
 	@Override
 	public String toString() {
 		return "Article [noArticle=" + noArticle + ", nom=" + nom + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
-				+ noCategorie + ", etatVente=" + etatVente + ", image=" + image + "]";
+				+ prixInitial + ", prixVente=" + prixVente + ", user=" + user + ", cat=" + cat + ", etatVente="
+				+ etatVente + ", image=" + image + "]";
+	}
+
+	// METHODES SET
+	
+	public void setRetrait(Retrait r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCategorie(Categorie c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setVendeur(Utilisateur user2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

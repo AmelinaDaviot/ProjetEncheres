@@ -1,6 +1,7 @@
 package fr.eni.projetencheres.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetencheres.bll.ArticleManager;
 import fr.eni.projetencheres.bo.Article;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class VenteArticleServlet
@@ -38,9 +40,34 @@ public class VenteArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// INFOS ARTICLE
+		String nom = request.getParameter("nom");
+		String description = request.getParameter("description");
+		
+		String image = request.getParameter("image");
+		String prix = request.getParameter("prix");
+		LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
+		LocalDate finEnchere = LocalDate.parse(request.getParameter("finEnchere"));
+		
+		
+		// INFOS CATEGORIE
+		String cat = request.getParameter("categorie");
+		String[] categories = cat.split(":");
+		int codeCategorie = Integer.valueOf(categories[0]);
+		String libelle = categories[1];
+		
+		// INFOS RETRAIT
+		String rue = request.getParameter("rue");
+		String cpo = request.getParameter("cpo");
+		String ville = request.getParameter("ville");
+		
+		// INFOS USER
+		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+		
 		ArticleManager am = ArticleManager.getInstance();
 		
-		Article art = am.vendre(request.getParameter("nom"), request.getParameter("description"), request.getParameter("debutEnchere"), request.getParameter("finEnchere"), request.getParameter("prix"), 0, 0, 0, getServletInfo())
+		am.vendre(nom, description, codeCategorie, libelle, image, prix, debutEnchere, finEnchere, rue, cpo, ville, user);
+		
 		
 	}
 

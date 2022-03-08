@@ -68,10 +68,10 @@
 						</div>
 						<select class="custom-select" id="categorie" name="categorie" required>
 							<option selected></option>
-							<option value="1">Informatique</option>
-							<option value="2">Ameublement</option>
-							<option value="3">Vêtement</option>
-							<option value="4">Sport & Loisir</option>
+							<option value="1:informatique">Informatique</option>
+							<option value="2:ameublement">Ameublement</option>
+							<option value="3:vetement">Vêtement</option>
+							<option value="4:sport & loirsir">Sport & Loisir</option>
 						</select>
 					</div>
 					</div>
@@ -108,26 +108,36 @@
 					</div>
 				</div>
 
+				<div class="row justify-content-center">
+					<div class="col-4">
+				<fieldset>
+					<legend>Retrait</legend>
+					<label for="rue">Rue :</label>
+					<input type="text" class="form-control" id="rue" name="rue" value="${sessionScope.utilisateur.rue}" required>
+					<label for="cpo">Code Postal :</label>
+					<input type="text" class="form-control" id="cpo" name="cpo" value="${sessionScope.utilisateur.codePostal}" required>
+					<label for="ville">Ville :</label>
+					<input type="text" class="form-control" id="ville" name="ville" value="${sessionScope.utilisateur.ville}" required>
+				
+				  </fieldset>
+				</div>
+			</div>
+
 				<div class="first-btn">
 					<div class="row justify-content-center">
-						<div class="col-1">
-							<button type="submit" class="btn btn-primary">Enregistrer</button>
+						<div class="col-2">
+							<button type="submit" class="btn btn-primary">Enregistrer</button> 
 						</div>
-						
+						<div class="col-2">
+							<a href="<%=request.getContextPath()%>/accueillir">
+								<button type="button" class="btn btn-secondary">Annuler</button>
+							</a>                   
+						</div>
 					</div>
 				</div>
 
-
 			</form>
-			<div class="first-btn">
-				<div class="row justify-content-center">
-			<div class="col-1">
-				<a href="<%=request.getContextPath()%>/accueillir">
-					<button type="submit" class="btn btn-secondary">Annuler</button>
-				</a>
-			</div>
-		</div>
-	</div>
+	
 
 		</main>
 		<footer></footer>
