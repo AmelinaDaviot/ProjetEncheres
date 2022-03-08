@@ -47,8 +47,6 @@
 				<p>Credit :${sessionScope.utilisateur.credit}</p>
 
 
-	
-	<!--"<%=request.getContextPath()%>/modification-profil"-->
 			<div name="first-btn">
 				
 					<form action="<%=request.getContextPath()%>/profil" method="post">

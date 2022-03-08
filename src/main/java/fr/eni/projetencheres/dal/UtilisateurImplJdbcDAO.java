@@ -29,10 +29,10 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	private final static String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	private final static String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS "
-			+ "SET pseudo = '?', nom = '?', prenom = '?', email = '?', telephone = '?', rue = '?', code_postal = '?', "
-			+ "ville = '?', mot_de_passe = '?' " + "WHERE no_utilisateur = ?";
+			+ "SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, "
+			+ "ville = ?, mot_de_passe = ? " + "WHERE no_utilisateur = ?";
 
-	private final static String DELETE_UTILISATEUR = "DELETE * FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private final static String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	Connection cnx;
 
@@ -99,7 +99,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.setString(7, user.getCodePostal());
 			stmt.setString(8, user.getVille());
 			stmt.setString(9, user.getMotDePasse());
-			
+
 			stmt.executeUpdate();
 
 			user.setCredit(100);
@@ -158,7 +158,6 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			PreparedStatement stmt = cnx.prepareStatement(SELECT_MDP_BY_ID);
 			stmt.setInt(1, user.getNoUtilisateur());
 			rs = stmt.executeQuery();
-			stmt.close();
 			if (rs.next()) {
 				String mdpBDD = rs.getString("mot_de_passe");
 				if (mdpBDD.equals(mdpActuel)) {
@@ -172,9 +171,12 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 					stmt2.setString(6, user.getRue());
 					stmt2.setString(7, user.getCodePostal());
 					stmt2.setString(8, user.getVille());
-					stmt2.setString(9, user.getMotDePasse());
+					if (user.getMotDePasse() == null) {
+						stmt2.setString(9, mdpBDD);
+					} else {
+						stmt2.setString(9, user.getMotDePasse());
+					}
 					stmt2.setInt(10, user.getNoUtilisateur());
-					
 
 					stmt2.executeUpdate();
 					stmt2.close();
@@ -183,25 +185,25 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 				}
 
 			}
-			
 
+			stmt.close();
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de la mise a jour du profil : " + e.getMessage());
 		}
+
 		return user;
 	}
 
 	@Override
-	public void delete(int no_utilisateur) {
+	public void delete(int no_utilisateur) throws DALException {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
 			stmt.setInt(1, no_utilisateur);
 			stmt.executeUpdate();
-			System.out.println("exécution suppresion");
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new DALException("Erreur lors de la suppression du profil : " + e.getMessage());
+
 		}
 	}
 

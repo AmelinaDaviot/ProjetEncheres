@@ -34,6 +34,7 @@ public class ModificationCompteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		RequestDispatcher connexion = null;
 		if (request.getParameter("action").equals("MODIF")) {
 
 			// Enregistrer les modifications du compte
@@ -78,37 +79,51 @@ public class ModificationCompteServlet extends HttpServlet {
 
 			if (request.getParameter("new-mdp").trim().isEmpty() || request.getParameter("new-mdp") == null) {
 				try {
-					user = um.modifierCompte(user, request.getParameter("mdp"));
+					user = um.modifierCompte(user, request.getParameter("mdp").toString());
+					connexion = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
+
 				} catch (BLLException e) {
-					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
 					if (connexion != null) {
 						request.setAttribute("error", e);
-						connexion.forward(request, response);
+
 					}
 				}
 			} else {
-				user.setMotDePasse(request.getAttribute("new-mdp").toString());
+				user.setMotDePasse((String) request.getParameter("new-mdp"));
 				try {
-					user = um.modifierCompte(user, request.getParameter("confirmation"), request.getParameter("mdp"));
+					user = um.modifierCompte(user, (String) request.getParameter("confirmation"),
+							(String) request.getParameter("mdp"));
+					connexion = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
 				} catch (BLLException e) {
-					RequestDispatcher connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+					connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
 					if (connexion != null) {
 						request.setAttribute("error", e);
-						connexion.forward(request, response);
+
 					}
 				}
-
 			}
+
 			request.getSession().setAttribute("utilisateur", user);
-			response.sendRedirect(request.getContextPath() + "/profil");
-			// Suppresion du compte
-		} else {
-			UtilisateurManager um = UtilisateurManager.getInstance();
-			um.supprimerCompte(Integer.valueOf(request.getSession().getAttribute("noUtilisateur").toString()));
-			request.getSession().invalidate();
-			response.sendRedirect(request.getContextPath() + "/accueillir");
+			if (connexion != null) {
+				connexion.forward(request, response);
+			}
 		}
 
+		// Suppresion du compte
+		else {
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+			try {
+				um.supprimerCompte(user.getNoUtilisateur());
+			} catch (BLLException e) {
+				connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
+				if (connexion != null) {
+					request.setAttribute("error", e);
+				}
+				request.getSession().invalidate();
+				response.sendRedirect(request.getContextPath() + "/accueillir");
+			}
+		}
 	}
-
 }
