@@ -99,7 +99,6 @@ public class ModificationCompteServlet extends HttpServlet {
 					connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
 					if (connexion != null) {
 						request.setAttribute("error", e);
-
 					}
 				}
 			}
@@ -115,14 +114,15 @@ public class ModificationCompteServlet extends HttpServlet {
 			UtilisateurManager um = UtilisateurManager.getInstance();
 			Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 			try {
-				um.supprimerCompte(user.getNoUtilisateur());
+				um.supprimerCompte(user.getNoUtilisateur(), (String) request.getParameter("mdp"));
+				request.getSession().invalidate();
+				response.sendRedirect(request.getContextPath() + "/accueillir");
 			} catch (BLLException e) {
 				connexion = request.getRequestDispatcher("/WEB-INF/jsp/gestion-profil.jsp");
 				if (connexion != null) {
 					request.setAttribute("error", e);
+					connexion.forward(request, response);
 				}
-				request.getSession().invalidate();
-				response.sendRedirect(request.getContextPath() + "/accueillir");
 			}
 		}
 	}

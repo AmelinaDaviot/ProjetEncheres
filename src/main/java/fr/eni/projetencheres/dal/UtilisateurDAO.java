@@ -7,6 +7,6 @@ public interface UtilisateurDAO {
 	public Utilisateur insert (Utilisateur user) throws DALException;
 	public Utilisateur selectById(int no_utilisateur);
 	public Utilisateur update (Utilisateur user, String mdpActuel) throws DALException;
-	public void delete(int no_utilisateur) throws DALException;
-
+	public void delete(int no_utilisateur, String mdp) throws DALException;
+	
 }

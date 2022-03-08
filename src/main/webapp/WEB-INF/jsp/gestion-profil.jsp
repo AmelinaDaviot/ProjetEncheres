@@ -24,7 +24,17 @@
 		</nav>
 
 		<main>
+		
 			<h2>Mon Profil</h2>
+			<%
+			if(request.getAttribute("error") != null){
+				Exception error = (Exception) request.getAttribute("error");
+			%>
+
+			<div class="alert alert-danger" role="alert">
+				<%= error.getMessage() %>
+			</div>
+			<%} %>
 			<form action="<%=request.getContextPath()%>/modification-profil"
 				method="post">
 				<div class="forms-control">

@@ -90,6 +90,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 		try {
 			PreparedStatement stmt = cnx.prepareStatement(INSERT_NOUVEL_UTILISATEUR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
+
 			stmt.setString(1, user.getPseudo());
 			stmt.setString(2, user.getNom());
 			stmt.setString(3, user.getPrenom());
@@ -195,16 +196,24 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 	}
 
 	@Override
-	public void delete(int no_utilisateur) throws DALException {
+	public void delete(int no_utilisateur, String mdp) throws DALException {
 		try {
-			PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+			PreparedStatement stmt = cnx.prepareStatement(SELECT_MDP_BY_ID);
 			stmt.setInt(1, no_utilisateur);
-			stmt.executeUpdate();
-			stmt.close();
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				String mdpBDD = rs.getString("mot_de_passe");
+				if (mdpBDD.equals(mdp)) {
+					stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+					stmt.setInt(1, no_utilisateur);
+					stmt.executeUpdate();
+					stmt.close();
+				} else {
+					throw new DALException ("Erreur lors de la suppression du profil : Mot de passe incorrect " );
+				}
+			}
 		} catch (SQLException e) {
 			throw new DALException("Erreur lors de la suppression du profil : " + e.getMessage());
-
 		}
 	}
-
 }

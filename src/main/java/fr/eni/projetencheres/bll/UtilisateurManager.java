@@ -132,9 +132,9 @@ public class UtilisateurManager {
 	 * @param noUtilisateur
 	 * @throws BLLException 
 	 */
-	public void supprimerCompte(int noUtilisateur) throws BLLException {
+	public void supprimerCompte(int noUtilisateur, String mdp) throws BLLException {
 		try {
-			dao.delete(noUtilisateur);
+			dao.delete(noUtilisateur, mdp);
 		} catch (DALException e) {
 			throw new BLLException (e.getMessage());
 		}
