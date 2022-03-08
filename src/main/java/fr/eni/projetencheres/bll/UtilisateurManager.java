@@ -65,12 +65,10 @@ public class UtilisateurManager {
 	 * @param codePostal
 	 * @param ville
 	 * @param motDePasse
-	 * @param confirmation <<<<<<< HEAD
-	 * @throws BLLException = cas ou pseudo ou email deja existants =======
+	 * @param confirmation
+	 * @throws BLLException = cas ou pseudo ou email deja existants
 	 * @throws BLLException
 	 * @throws BLLException = cas ou motDePasse et confirmation ne sont PAS EGAUX
-	 *                      >>>>>>> branch 'master' of
-	 *                      https://github.com/AmelinaDaviot/ProjetEncheres
 	 */
 	public Utilisateur sInscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
@@ -132,10 +130,14 @@ public class UtilisateurManager {
 	 * M�thode pour supprimer le compte de l'utilisateur
 	 * 
 	 * @param noUtilisateur
+	 * @throws BLLException 
 	 */
-	public void supprimerCompte(int noUtilisateur) {
-		dao.delete(noUtilisateur);
-		System.out.println("test suppression BLL");
+	public void supprimerCompte(int noUtilisateur) throws BLLException {
+		try {
+			dao.delete(noUtilisateur);
+		} catch (DALException e) {
+			throw new BLLException (e.getMessage());
+		}
 	}
 
 }
