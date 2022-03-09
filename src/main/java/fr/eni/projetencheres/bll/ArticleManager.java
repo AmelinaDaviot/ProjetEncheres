@@ -1,5 +1,6 @@
 package fr.eni.projetencheres.bll;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import fr.eni.projetencheres.bo.Article;
@@ -17,7 +18,12 @@ public class ArticleManager {
 
 	// CONSTRUTEUR
 	public ArticleManager() {
-		articleDAO = DAOFactory.createArticleDAO();
+		try {
+			articleDAO = DAOFactory.createArticleDAO();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// SINGLETON
@@ -45,8 +51,8 @@ public class ArticleManager {
 	 * @return a
 	 */
 	public Article vendre(String nom, String description, int codeCategorie, String libelle, String image,
-			int prixInitial, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String rue, String cpo, String ville,
-			Utilisateur user) {
+			int prixInitial, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String rue, String cpo, 
+			String ville, Utilisateur user) {
 
 		Article a = new Article(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, image);
 		Retrait r = new Retrait(rue, cpo, ville);
@@ -57,12 +63,13 @@ public class ArticleManager {
 		a.setVendeur(user);
 		
 		System.out.println("BLL : ça marche");
+		System.out.println(a.toString());
 		
 		try {
 			articleDAO.insert(a, r);
+			System.out.println("entrée dans l'insertion");
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("erreur BLL" + e.getMessage());
 		}
 		
 		return a;

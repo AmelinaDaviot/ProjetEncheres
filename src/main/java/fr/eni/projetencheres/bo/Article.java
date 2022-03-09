@@ -13,10 +13,10 @@ public class Article {
 	private int prixInitial;
 	private int prixVente;
 
-	private int noUtilisateur;
-	private int noCategorie;
+//	private int noUtilisateur;
+//	private int noCategorie;
 
-	private Utilisateur user;
+	private Utilisateur vendeur;
 	private Categorie c;
 	private Retrait r;
 
@@ -44,7 +44,12 @@ public class Article {
 
 	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int prixInitial, String image) {
-		this(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixInitial, description, image);
+		this.nom = nom;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.prixInitial = prixInitial;
+		this.image = image;
 	}
 
 	// GETTERS ET SETTERS
@@ -120,23 +125,45 @@ public class Article {
 		this.image = image;
 	}
 
-	public int getNoUtilisateur() {
-		return noUtilisateur;
-	}
+//	public int getNoUtilisateur() {
+//		return noUtilisateur;
+//	}
 
 //	public void setNoUtilisateur(int noUtilisateur) {
 //		this.noUtilisateur = noUtilisateur;
 //	}
 
-	public int getNoCategorie() {
-		return noCategorie;
-	}
+//	public int getNoCategorie() {
+//		return noCategorie;
+//	}
 
 //	public void setNoCategorie(int noCategorie) {
 //		this.noCategorie = noCategorie;
 //	}
+	
+	public Utilisateur getVendeur() {
+		return vendeur;
+	}
+
+	public Categorie getCategorie() {
+		return c;
+	}
+
+	public Retrait getR() {
+		return r;
+	}
+	
 
 	// METHODE TO_STRING
+
+	@Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nom=" + nom + ", description=" + description
+				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", user=" + vendeur + ", c=" + c + ", r=" + r + ", etatVente="
+				+ etatVente + ", image=" + image + "]";
+	}
+
 
 	// METHODES SET
 	public void setRetrait(Retrait r) {
@@ -147,8 +174,8 @@ public class Article {
 		this.c = new Categorie(c.getNoCategorie(), c.getLibelle());
 	}
 
-	public void setVendeur(Utilisateur user) {
-		this.noUtilisateur = user.getNoUtilisateur();
+	public void setVendeur(Utilisateur vendeur) {
+		this.vendeur = vendeur;
 	}
 
 }
