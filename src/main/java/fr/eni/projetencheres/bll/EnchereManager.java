@@ -24,7 +24,10 @@ public class EnchereManager {
 		return instance;
 	}
 	
-	public Enchere Encherir(Enchere enchere) {
+	public Enchere Encherir(int no_article, int no_utilisateur, int montant) {
+		Enchere enchere = new Enchere(null, montant, null, null, null)
+		
+		
 		
 		
 		return enchere;
