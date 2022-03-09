@@ -11,4 +11,8 @@ public class DAOFactory {
 	public static ArticleDAO createArticleDAO() {
 		return new ArticleImplJdbcDAO();
 	}
+	
+	public static EnchereDAO createEnchereDAO () throws SQLException {
+		return new EnchereImplJdbcDAO();
+	}
 }
