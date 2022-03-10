@@ -70,30 +70,7 @@
 				</select>
 			</div>
 
-			<%
-			List<Article> listeArticles = (List<Article>) request.getAttribute("listeArticles");
-			for (Article article : listeArticles) {
-			%>
-			<tr>
-				<td><%=article.getNom()%></td>
-				<%
-				if (Integer.valueOf(article.getPrixVente()) == null) {
-				%>
-				<td><%=article.getPrixInitial()%></td>
-				<%
-				} else {
-				%>
-				<td><%=article.getPrixVente()%></td>
-				<%
-				}
-				%>
-				<td><%=article.getDateFinEnchere()%></td>
-				<td><%=article.getVendeur().getPseudo()%></td>
-				<td><%=article.getCategorie().getLibelle()%></td>
-			</tr>
-			<%
-			}
-			%>
+			
 			
 			
 		</main>

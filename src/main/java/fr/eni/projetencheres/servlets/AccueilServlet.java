@@ -32,6 +32,7 @@ public class AccueilServlet extends HttpServlet {
 			ArticleManager am = ArticleManager.getInstance();
 			List<Article> listeArticles = am.getArticles();
 			request.setAttribute("listeArticles", listeArticles);
+			
 			RequestDispatcher rq = null;
 			if (request.getSession().getAttribute("utilisateur") != null) {
 				rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
