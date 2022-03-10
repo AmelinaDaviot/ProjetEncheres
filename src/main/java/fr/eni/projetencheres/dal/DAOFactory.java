@@ -12,8 +12,13 @@ public class DAOFactory {
 		}
 	}
 
-	public static ArticleDAO createArticleDAO() throws SQLException {
-		return new ArticleImplJdbcDAO();
+	public static ArticleDAO createArticleDAO() throws DALException {
+		try {
+			return new ArticleImplJdbcDAO();
+		} catch (DALException e) {
+			throw e;
+		}
+		
 	}
 
 	public static EnchereDAO createEnchereDAO() throws DALException {

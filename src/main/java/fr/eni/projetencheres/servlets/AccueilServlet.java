@@ -27,8 +27,9 @@ public class AccueilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArticleManager am = ArticleManager.getInstance();
+		
 		try {
+			ArticleManager am = ArticleManager.getInstance();
 			List<Article> listeArticles = am.getArticles();
 			request.setAttribute("listeArticles", listeArticles);
 

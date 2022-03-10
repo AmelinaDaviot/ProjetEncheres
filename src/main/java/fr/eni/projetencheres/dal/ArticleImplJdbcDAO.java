@@ -36,8 +36,13 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 
 	Connection cnx;
 
-	public ArticleImplJdbcDAO() throws SQLException {
-		cnx = ConnectionProvider.getConnection();
+	public ArticleImplJdbcDAO() throws DALException {
+		try {
+			cnx = ConnectionProvider.getConnection();
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
+		
 	}
 
 	@Override
