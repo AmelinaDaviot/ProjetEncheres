@@ -66,23 +66,38 @@
 			List<Article> listeArticles = (List<Article>) request.getAttribute("listeArticles");
 			for (Article article : listeArticles) {
 			%>
-			<tr>
-				<td><%=article.getNom()%></td>
-				<%
-				if (Integer.valueOf(article.getPrixVente()) == null) {
-				%>
-				<td><%=article.getPrixInitial()%></td>
-				<%
-				} else {
-				%>
-				<td><%=article.getPrixVente()%></td>
-				<%
-				}
-				%>
-				<td><%=article.getDateFinEnchere()%></td>
-				<td><%=article.getVendeur().getPseudo()%></td>
-				<td><%=article.getCategorie().getLibelle()%></td>
-			</tr>
+
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title text-capitalize"><%=article.getNom()%></h5>
+					<p class="card-text">
+						<%
+						if (Integer.valueOf(article.getPrixVente()) != null) {
+						%>
+						Prix :
+						<%=article.getPrixInitial()%>
+						points
+						<%
+						} else {
+						%>
+						Prix :
+						<%=article.getPrixVente()%>
+						points
+						<%
+						}
+						%>
+						</br>
+						Fin de l'enchère :
+						<%=article.getDateFinEnchere()%>
+						</br>
+						Vendeur :
+						<%=article.getVendeur().getPseudo()%>
+						</br>
+						Catégorie :
+						<%=article.getCategorie().getLibelle()%>
+					</p>
+				</div>
+			</div>
 			<%
 			}
 			%>
