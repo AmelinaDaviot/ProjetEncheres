@@ -8,9 +8,8 @@
 	<welcome-file-list>
 		<welcome-file>accueillir</welcome-file>
 	</welcome-file-list>
-	
-	<session-config>
-	<session-timeout>20</session-timeout>
-	</session-config>
 
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
 </web-app>
