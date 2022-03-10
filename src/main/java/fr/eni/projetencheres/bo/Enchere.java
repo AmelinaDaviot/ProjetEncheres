@@ -6,16 +6,16 @@ public class Enchere {
 	
 	private LocalDate dateEnchere;
 	private int montantEnchere;
-	private int no_article;
-	private int no_acheteur;
+	private Article article;
+	private Utilisateur acheteur;
 	
 	
-	public Enchere(LocalDate dateEnchere, int montantEnchere, int no_article, int no_acheteur) {
-		
-		this.dateEnchere = dateEnchere;
+
+	public Enchere(int montantEnchere, Article article, Utilisateur acheteur) {		
 		this.montantEnchere = montantEnchere;
-		this.no_article = no_article;
-		this.no_acheteur = no_acheteur;
+		this.article = article;
+		this.acheteur = acheteur;
+		this.dateEnchere = LocalDate.now();
 	}
 
 
@@ -39,23 +39,23 @@ public class Enchere {
 	}
 
 
-	public int getArticle() {
-		return no_article;
+	public Article getArticle() {
+		return article;
 	}
 
 
-	public void setArticle(int no_article) {
-		this.no_article = no_article;
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 
-		public int getAcheteur() {
-		return no_acheteur;
+		public Utilisateur getAcheteur() {
+		return acheteur;
 	}
 
 
-	public void setAcheteur(int no_acheteur) {
-		this.no_acheteur = no_acheteur;
+	public void setAcheteur(Utilisateur acheteur) {
+		this.acheteur = acheteur;
 	}
 
 

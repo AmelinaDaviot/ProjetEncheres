@@ -36,8 +36,12 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 
 	Connection cnx;
 
-	public UtilisateurImplJdbcDAO() throws SQLException {
-		cnx = ConnectionProvider.getConnection();
+	public UtilisateurImplJdbcDAO() throws DALException {
+		try {
+			cnx = ConnectionProvider.getConnection();
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
 	}
 
 	/**
@@ -209,7 +213,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 					stmt.executeUpdate();
 					stmt.close();
 				} else {
-					throw new DALException ("Erreur lors de la suppression du profil : Mot de passe incorrect " );
+					throw new DALException("Erreur lors de la suppression du profil : Mot de passe incorrect ");
 				}
 			}
 		} catch (SQLException e) {
