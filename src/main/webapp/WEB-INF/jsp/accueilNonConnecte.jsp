@@ -37,16 +37,16 @@
 
 		<main>
 			<h2>Liste des enchères</h2>
-
+		</br>
 			<h3>Filtres :</h3>
-
+		</br>
 			<div class="input-group">
 				<input type="search" class="form-control rounded"
 					placeholder="Search" aria-label="Search"
 					aria-describedby="search-addon" />
 				<button type="button" class="btn btn-outline-primary">search</button>
 			</div>
-
+		</br>
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<label class="input-group-text" for="categorie">Catégories
@@ -61,7 +61,7 @@
 					<option value="4:sport & loisir">Sport & Loisir</option>
 				</select>
 			</div>
-
+		</br>
 			<%
 			List<Article> listeArticles = (List<Article>) request.getAttribute("listeArticles");
 			for (Article article : listeArticles) {
@@ -101,7 +101,7 @@
 			<%
 			}
 			%>
-
+		</br>
 		</main>
 	</div>
 </body>

@@ -21,6 +21,7 @@
 
         <main>
             <h2>Mon profil</h2>
+        </br>
 
 			<%
 			if(request.getAttribute("error") != null){
@@ -44,7 +45,7 @@
                         <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre Nom" required>
                     </div>
                 </div>
-
+            </br>
                 <div class="row justify-content-center">
                     <div class="col-4">
                         <label for="prenom">Prénom :</label>
@@ -55,7 +56,7 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com" required>
                       </div>
                 </div>
-
+            </br>
                 <div class="row justify-content-center">
                     <div class="col-4">
                         <label for="tel">Téléphone :</label>
@@ -66,7 +67,7 @@
                         <input type="text" class="form-control" id="rue" name="rue" placeholder="ex : 12 impasse Ampère" required>
                     </div>
                 </div>
-
+            </br>
                 <div class="row justify-content-center">
                     <div class="col-4">
                         <label for="cpo">Code Postal :</label>
@@ -77,7 +78,7 @@
                         <input type="text" class="form-control" id="ville" name="ville" placeholder="ex : La Roche-sur-Yon" required>
                       </div>
                 </div>
-
+            </br>
                 <div class="row justify-content-center">
                     <div class="col-4">
                         <label for="mdp">Mot de passe :</label>
@@ -88,7 +89,7 @@
                         <input type="password" class="form-control" id="confirmation" name="confirmation" required>
                     </div>
                 </div>
-                
+            </br>
                 <div class="first-btn">
                     <div class="row justify-content-center">
                         <div class="col-1">

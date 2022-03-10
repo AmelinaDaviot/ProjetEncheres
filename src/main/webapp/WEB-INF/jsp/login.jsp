@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <!--<link rel="stylesheet" href="css/style.css">-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="css/utilisateur.css">
@@ -50,7 +50,7 @@
 			<div class="first-btn">
 				<button type="submit" class="btn btn-primary">Se connecter</button>
 				<a href="<%=request.getContextPath()%>/inscription ">
-					<button type="button" class="btn btn-secondary">Creer un compte</button>
+					<button type="button" class="btn btn-secondary">Créer un compte</button>
 				</a>
 			</div>
 

@@ -16,41 +16,101 @@
 
 	<div class="container">
 
-		<nav class="navbar navbar-light bg-light justify-content-between">
+        <nav class="navbar navbar-light bg-light justify-content-between">
             <a href="<%=request.getContextPath()%>/accueillir" class="text-dark text-decoration-none"> <h1>ENI-ENCHERES</h1></a>
-		</nav>
+            <form class="form-inline">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Enchères</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<%=request.getContextPath() %>/vendre-article">Vendre un article</a>
+                    </li>
+                    <li class="nav-item">
+                    	<a class="nav-link active text-dark" >Crédit : ${sessionScope.utilisateur.credit}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<%=request.getContextPath()%>/profil">Mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/deconnexion ">Déconnexion</a>
+                    </li>
+                  </ul>
+            </form>
+          </nav>
 
 		<main>
-			Bonjour : ${sessionScope.utilisateur.pseudo}
+			<h2 class="text-capitalize">Bonjour ${sessionScope.utilisateur.pseudo} !</h2>
+		</br>
 
-			
-				<div class="row justify-content-center">
-					<div class="col-6">
-						Nom :
-						<p class="text-center" >${sessionScope.utilisateur.nom}</p>
+			<div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Nom : </div>
+				<div class="col-2 text-capitalize">${sessionScope.utilisateur.nom}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
 
-					</div>
-					
-				</div>
-				<div class="row justify-content-center">
-					<div class="col-6">
-
-						<p class = "info">Prenom :${sessionScope.utilisateur.prenom}</p>
-					</div>
-				</div>
-
-				<p>Email :${sessionScope.utilisateur.email}</p>
-				<p>Telephone :${sessionScope.utilisateur.telephone}</p>
-				<p>Rue :${sessionScope.utilisateur.rue}</p>
-				<p>Code postal :${sessionScope.utilisateur.codePostal}</p>
-				<p>Ville :${sessionScope.utilisateur.ville}</p>
-				<p>Credit :${sessionScope.utilisateur.credit}</p>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Prénom : </div>
+				<div class="col-2 text-capitalize">${sessionScope.utilisateur.prenom}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Email : </div>
+				<div class="col-2">${sessionScope.utilisateur.email}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Téléphone : </div>
+				<div class="col-2">${sessionScope.utilisateur.telephone}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Rue : </div>
+				<div class="col-2">${sessionScope.utilisateur.rue}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Code postal : </div>
+				<div class="col-2">${sessionScope.utilisateur.codePostal}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Ville : </div>
+				<div class="col-2">${sessionScope.utilisateur.ville}</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
+			  <div class="row justify-content-center">
+				<div class="col-3"></div>
+				<div class="col-2">Crédit : </div>
+				<div class="col-2">${sessionScope.utilisateur.credit} points</div>
+				<div class="col-5"></div>
+			  </div>
+			</br>
 
 
 			<div name="first-btn">
-				
+				<div class="row justify-content-center">
+					<div class="col-1">
 					<form action="<%=request.getContextPath()%>/profil" method="post">
 						<button type="submit" class="btn btn-primary">Modifier</button></form>
+					</div>
+					</div>
+					</div>
+					
 				
 			</div>
 		
