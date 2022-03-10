@@ -47,7 +47,7 @@ public class ConnexionServlet extends HttpServlet {
 			um = UtilisateurManager.getInstance();
 			Utilisateur user = null;
 			user = um.seConnecter(request.getParameter("identifiant"), request.getParameter("motDePasse"));
-			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");
+			RequestDispatcher rq = request.getRequestDispatcher("/accueillir");
 			if (rq != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("utilisateur", user);				
