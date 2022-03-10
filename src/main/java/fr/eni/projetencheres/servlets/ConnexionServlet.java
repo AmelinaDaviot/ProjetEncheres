@@ -42,8 +42,9 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		UtilisateurManager um = UtilisateurManager.getInstance();
+		UtilisateurManager um;
 		try {
+			um = UtilisateurManager.getInstance();
 			Utilisateur user = null;
 			user = um.seConnecter(request.getParameter("identifiant"), request.getParameter("motDePasse"));
 			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/accueilConnecte.jsp");

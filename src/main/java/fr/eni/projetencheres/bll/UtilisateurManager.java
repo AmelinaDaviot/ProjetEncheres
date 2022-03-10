@@ -14,16 +14,16 @@ public class UtilisateurManager {
 	private UtilisateurDAO dao;
 
 	// constructeur + conncetion avec DAO
-	public UtilisateurManager() {
+	public UtilisateurManager() throws BLLException {
 		try {
 			dao = DAOFactory.createUtilisateurDAO();
-		} catch (SQLException e) {
-
+		} catch (DALException e) {
+			throw new BLLException(e.getMessage());
 		}
 	}
 
 	// singleton
-	public static UtilisateurManager getInstance() {
+	public static UtilisateurManager getInstance() throws BLLException {
 		if (instance == null) {
 			instance = new UtilisateurManager();
 		}

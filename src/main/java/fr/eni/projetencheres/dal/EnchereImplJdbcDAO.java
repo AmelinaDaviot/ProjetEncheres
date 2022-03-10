@@ -16,27 +16,28 @@ public class EnchereImplJdbcDAO implements EnchereDAO {
 	private final static String UPDATE_ENCHERE = "  UPDATE ENCHERES SET no_utilisateur = ?, date_enchere = GETDATE(), montant_enchere = ? where no_article = ? ";
 
 	private final static String SELECT_ENCHERE = "select "
-			+ "	art.description 'description article', art.date_debut_enchere 'debut enchère',"
-			+ "	art.date_fin_enchere 'fin enchères',art.etat_vente 'etat de vente',"
-			+ "	cat.libelle 'libelle de categorie', cat.no_categorie 'no catégorie',"
-			+ "	vendeur.pseudo 'pseudo vendeur',"
-			+ "	ench.date_enchere 'date encherissement', ench.montant_enchere 'montant enchere',"
-			+ "	encherisseur.pseudo 'pseudo acheteur'" + "		from ARTICLES_VENDUS as art"
-			+ "		inner join CATEGORIES as cat" + "			on art.no_categorie = cat.no_categorie"
-			+ "		inner join UTILISATEURS as vendeur" + "			on vendeur.no_utilisateur = art.no_utilisateur"
-			+ "		left outer join ENCHERES as ench " + "			on ench.no_article = art.no_article"
-			+ "		inner join Utilisateurs as encherisseur"
-			+ "			on encherisseur.no_utilisateur = ench.no_utilisateur"
+			+ "	art.description 'description_article', art.date_debut_enchere 'debut_enchère',"
+			+ "	art.date_fin_enchere 'fin_enchères',art.etat_vente 'etat_vente',"
+			+ "	cat.libelle 'libelle_categorie', cat.no_categorie 'no_catégorie',"
+			+ "	vendeur.pseudo 'pseudo_vendeur',"
+			+ "	ench.date_enchere 'date_encherissement', ench.montant_enchere 'montant_enchere',"
+			+ "	encherisseur.pseudo 'pseudo_acheteur'" 
+			+ "		from ARTICLES_VENDUS as art"
+			+ "		inner join CATEGORIES as cat" + " on art.no_categorie = cat.no_categorie"
+			+ "		inner join UTILISATEURS as vendeur" + " on vendeur.no_utilisateur = art.no_utilisateur"
+			+ "		left outer join ENCHERES as ench " + " on ench.no_article = art.no_article"
+			+ "		inner join Utilisateurs as encherisseur" + " on encherisseur.no_utilisateur = ench.no_utilisateur"
 			+ "		where (getdate() between art.date_debut_enchere and art.date_fin_enchere) and art.etat_vente in ('EC')";
 
 	private final static String SELECT_BY_NO_ARTICLE = "select"
-			+ "art.nom_article 'nom article', art.description 'description article', art.date_debut_enchere 'debut enchère',"
-			+ "	art.date_fin_enchere 'fin enchères',art.etat_vente 'etat de vente',"
-			+ "	cat.libelle 'libelle de categorie', cat.no_categorie 'no catégorie',"
-			+ "vendeur.pseudo 'pseudo vendeur',"
-			+ "ench.date_enchere 'date encherissement', ench.montant_enchere 'montant enchere',"
-			+ "			encherisseur.pseudo 'pseudo acheteur',"
-			+ "	rtr.rue 'rue', rtr.code_postal 'code postal', rtr.ville 'ville'" + "	from ARTICLES_VENDUS as art"
+			+ "art.nom_article 'nom_article', art.description 'description_article', art.date_debut_enchere 'debut_enchère',"
+			+ "	art.date_fin_enchere 'fin_enchères',art.etat_vente 'etat_vente',"
+			+ "	cat.libelle 'libelle_categorie', cat.no_categorie 'no_catégorie',"
+			+ "vendeur.pseudo 'pseudo_vendeur',"
+			+ "ench.date_enchere 'date_encherissement', ench.montant_enchere 'montant_enchere',"
+			+ "			encherisseur.pseudo 'pseudo_acheteur',"
+			+ "	rtr.rue 'rue', rtr.code_postal 'code_postal', rtr.ville 'ville'" 
+			+ "	from ARTICLES_VENDUS as art"
 			+ "		left join RETRAITS as rtr" + "			on art.no_article = rtr.no_article"
 			+ "		left join CATEGORIES as cat" + "			on art.no_categorie = cat.no_categorie"
 			+ "		left join UTILISATEURS as vendeur" + "			on vendeur.no_utilisateur = art.no_utilisateur"
@@ -58,10 +59,7 @@ public class EnchereImplJdbcDAO implements EnchereDAO {
 	@Override
 	public Enchere encherir(Enchere enchere) throws DALException {
 		PreparedStatement stmt;
-		ResultSet rs;
-
 		try {
-
 			if (Integer.valueOf(enchere.getArticle().getPrixVente()) == null) {
 				stmt = cnx.prepareStatement(CREER_ENCHERE);
 				stmt.setInt(1, enchere.getAcheteur().getNoUtilisateur());
@@ -74,17 +72,25 @@ public class EnchereImplJdbcDAO implements EnchereDAO {
 				stmt.setInt(3, enchere.getArticle().getNoArticle());
 			}
 		stmt.executeUpdate();
-
+		stmt = cnx.prepareStatement(SELECT_BY_NO_ARTICLE);
+		stmt.setInt(1, enchere.getArticle().getNoArticle());
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()) {
+			enchere = update(enchere, rs);			
+		}
+			
+			
+			
 		} catch (SQLException e) {
 			e.getMessage();
 			throw new DALException("Erreur lors de la connexion a la base de donnée", e);
 		}
+		
+	
+		return enchere;
+	}
 
 	
-		return ;
-	}
-
-	}
 
 	@Override
 	public Enchere selectByIdArticle(int no_article) {
@@ -98,9 +104,23 @@ public class EnchereImplJdbcDAO implements EnchereDAO {
 		return enchere;
 	}
 
-	@Override
-	public Enchere update(int no_article) throws DALException {
-		Enchere enchere = null;
+
+	public Enchere update(Enchere enchere, ResultSet rs) throws DALException {
+		
+		try {
+			enchere.getAcheteur().setPseudo(rs.getString("pseudo_acheteur"));
+			enchere.getArticle().setNom(rs.getString("nom_article"));
+			enchere.getArticle().setDescription(rs.getString("description_article"));
+			enchere.getArticle().setDateDebutEnchere(rs.getDate("debut_enchère").toLocalDate());
+			enchere.getArticle().setDateFinEnchere(rs.getDate("fin_enchères").toLocalDate());
+			
+			
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
+		
+		
+		
 		return enchere;
 	}
 
