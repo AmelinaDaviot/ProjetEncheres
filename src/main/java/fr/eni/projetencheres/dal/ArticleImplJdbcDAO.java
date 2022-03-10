@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projetencheres.bo.Article;
+import fr.eni.projetencheres.bo.Categorie;
 import fr.eni.projetencheres.bo.Retrait;
+import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.utils.ConnectionProvider;
 
 public class ArticleImplJdbcDAO implements ArticleDAO {
@@ -24,8 +26,17 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 
 	private final static String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
 
-	private final static String SELECT_ALL_ARTICLE = "SELECT * FROM ARTICLES_VENDUS"
+	private final static String SELECT_ALL_ARTICLE = "SELECT av.*, c.*, u.* "
+			+ "FROM ARTICLES_VENDUS as av "
+			+ "INNER JOIN CATEGORIES as c "
+			+ "ON av.no_categorie = c.no_categorie "
+			+ "INNER JOIN UTILISATEURS as u "
+			+ "ON av.no_utilisateur = u.no_utilisateur "
 			+ "WHERE etat_vente = 'EC'";
+			
+			
+			/*"SELECT * FROM ARTICLES_VENDUS "
+			+ "WHERE etat_vente = 'EC'";*/
 
 //			"SELECT ARTICLES_VENDUS.*, CATEGORIES.* "
 //			+ "FROM ARTICLES_VENDUS INNER JOIN CATEGORIES "
@@ -132,6 +143,11 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 		 * (nom_article, description, date_debut_enchere, date_fin_enchere,
 		 * prix_initial, " + "no_utilisateur, no_categorie, etat_vente, image)
 		 */
+		
+		/*
+		 * (pseudo, nom, prenom, email, telephone, rue, 
+		 * code_postal, ville, mot_de_passe, credit, administrateur)
+		 */
 
 		try {
 			Statement stmt = cnx.createStatement();
@@ -142,6 +158,13 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 						rs.getString("description"), rs.getDate("date_debut_enchere").toLocalDate(),
 						rs.getDate("date_fin_enchere").toLocalDate(), rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"), rs.getString("etat_vente"), rs.getString("image"));
+				Utilisateur vendeur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), 
+						rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"), 
+						rs.getString("ville"), rs.getString("mot_de_passe"));
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+				art.setVendeur(vendeur);
+				art.setCategorie(categorie);
 				listeArticles.add(art);
 			}
 
