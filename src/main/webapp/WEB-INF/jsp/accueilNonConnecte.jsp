@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="fr.eni.projetencheres.bo.Article" %>
+<%@page import="fr.eni.projetencheres.bo.Utilisateur" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,6 +33,41 @@
 
 	<main>
 		<h2>Liste des enchères</h2>
+
+		<h3>Filtres :</h3>
+
+		<div class="input-group">
+			<input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+			<button type="button" class="btn btn-outline-primary">search</button>
+		</div>
+
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="categorie">Catégories :</label>
+			</div>
+			<select class="custom-select" id="categorie" name="categorie" required>
+				<option selected>Toutes</option>
+				<option value="1:informatique">Informatique</option>
+				<option value="2:ameublement">Ameublement</option>
+				<option value="3:vetement">Vêtement</option>
+				<option value="4:sport & loisir">Sport & Loisir</option>
+			</select>
+		</div>
+		
+		<%
+		Utilisateur vendeur;
+			List<Article> listeArticles = (List <Article>) request.getAttribute("listeArticles");
+		for(Article article : listeArticles){
+			%>
+			<tr>
+			<td><%= article.getNom() %></td>
+			<td><%= article.getPrixInitial() %></td>
+			<td><%= article.getDateFinEnchere() %></td>
+			<td><%= article.getDescription() %></td>
+			</tr>
+			<%
+		}
+		%>
 		
 	</main>
 </div>

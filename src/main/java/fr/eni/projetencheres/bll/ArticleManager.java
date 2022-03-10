@@ -2,6 +2,7 @@ package fr.eni.projetencheres.bll;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Categorie;
@@ -35,7 +36,7 @@ public class ArticleManager {
 	}
 
 	/**
-	 * 
+	 * Permettre la mise en vente d'un article
 	 * @param nom
 	 * @param description
 	 * @param codeCategorie
@@ -51,29 +52,73 @@ public class ArticleManager {
 	 * @return a
 	 */
 	public Article vendre(String nom, String description, int codeCategorie, String libelle, String image,
-			int prixInitial, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String rue, String cpo, 
-			String ville, Utilisateur user) {
+			int prixInitial, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String rue, String cpo, String ville,
+			Utilisateur user) {
 
 		Article a = new Article(nom, description, dateDebutEnchere, dateFinEnchere, prixInitial, image);
 		Retrait r = new Retrait(rue, cpo, ville);
 		Categorie c = new Categorie(codeCategorie, libelle);
-		
+
 		a.setRetrait(r);
 		a.setCategorie(c);
 		a.setVendeur(user);
-		
+
 		System.out.println("BLL : ça marche");
 		System.out.println(a.toString());
-		
+
 		try {
 			articleDAO.insert(a, r);
 			System.out.println("entrée dans l'insertion");
 		} catch (DALException e) {
 			System.out.println("erreur BLL" + e.getMessage());
 		}
-		
-		return a;
 
+		return a;
+	}
+
+	/**
+	 * Récupérer les articles par le noArticle
+	 * @param noArticle
+	 * @return art
+	 * @throws BLLException
+	 */
+	public Article getArticleById(int noArticle) throws BLLException {
+		Article art = null;
+		try {
+			art = articleDAO.selectById(noArticle);
+			System.out.println("BLL : selection reussie");
+		} catch (DALException e) {
+			throw new BLLException("Echec getArticleById : " + e.getMessage());
+		}
+		return art;
+	}
+
+	/**
+	 * Liste des articles en vente
+	 * @return articles
+	 * @throws BLLException
+	 */
+	public List<Article> getArticles() throws BLLException {
+		List<Article> articles = null;
+		try {
+			articles = articleDAO.selectAll();
+		} catch (DALException e) {
+			throw new BLLException("Echec getArticles : " + e.getMessage());
+		}
+		return articles;
+	}
+
+	/**
+	 * Permettre l'annulation d'une vente
+	 * @param no_article
+	 * @throws BLLException
+	 */
+	public void annulerVente(int no_article) throws BLLException {
+		try {
+			articleDAO.delete(no_article);
+		} catch (DALException e) {
+			throw new BLLException(e.getMessage());
+		}
 	}
 
 }
