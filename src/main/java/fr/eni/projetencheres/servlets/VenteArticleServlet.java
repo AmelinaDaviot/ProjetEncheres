@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetencheres.bll.ArticleManager;
+import fr.eni.projetencheres.bll.BLLException;
 import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Utilisateur;
 
@@ -62,11 +63,18 @@ public class VenteArticleServlet extends HttpServlet {
 		// INFOS USER
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		
-		ArticleManager am = ArticleManager.getInstance();
-		Article a = am.vendre(nom, description, codeCategorie, libelle, image, prix, debutEnchere, finEnchere, 
-				rue, cpo, ville, user);
+		ArticleManager am;
+		try {
+			am = ArticleManager.getInstance();
+			Article a = am.vendre(nom, description, codeCategorie, libelle, image, prix, debutEnchere, finEnchere, 
+					rue, cpo, ville, user);
+			
+			response.sendRedirect(request.getContextPath() + "/accueillir");
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		response.sendRedirect(request.getContextPath() + "/accueillir");
 		
 	}
 

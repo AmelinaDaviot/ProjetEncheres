@@ -18,17 +18,16 @@ public class ArticleManager {
 	private ArticleDAO articleDAO;
 
 	// CONSTRUTEUR
-	public ArticleManager() {
+	public ArticleManager() throws BLLException {
 		try {
 			articleDAO = DAOFactory.createArticleDAO();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (DALException e) {
+			throw new BLLException(e.getMessage());
 		}
 	}
 
 	// SINGLETON
-	public static ArticleManager getInstance() {
+	public static ArticleManager getInstance() throws BLLException {
 		if (instance == null) {
 			instance = new ArticleManager();
 		}
