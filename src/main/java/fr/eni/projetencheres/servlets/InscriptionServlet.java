@@ -46,12 +46,12 @@ public class InscriptionServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Recuperation des donnees enregistrees par l'utilisateur
-		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			Utilisateur user = um.sInscrire(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"),
-					request.getParameter("email"), request.getParameter("tel"), request.getParameter("rue"),
-					request.getParameter("cpo"), request.getParameter("ville"), request.getParameter("mdp"),
-					request.getParameter("confirmation"));
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			Utilisateur user = um.sInscrire(request.getParameter("pseudo"), request.getParameter("nom"),
+					request.getParameter("prenom"), request.getParameter("email"), request.getParameter("tel"),
+					request.getParameter("rue"), request.getParameter("cpo"), request.getParameter("ville"),
+					request.getParameter("mdp"), request.getParameter("confirmation"));
 
 			request.getSession().setAttribute("utilisateur", user);
 			// Si creation du profil est validee, l'utilisateur est redirige vers la page
@@ -63,11 +63,11 @@ public class InscriptionServlet extends HttpServlet {
 //			} else {
 //				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 //			}
-			
+
 		} catch (BLLException e) {
 			// TODO renvoyer a la page d'inscription si pseudo existant ou email existant +
 			// message d'erreur associe
-			
+
 			RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
 			if (rq != null) {
 				request.setAttribute("error", e);
