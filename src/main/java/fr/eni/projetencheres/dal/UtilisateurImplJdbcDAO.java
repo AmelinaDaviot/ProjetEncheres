@@ -71,13 +71,11 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 						rs.getString("code_postal"), rs.getString("ville"), null, rs.getInt("credit"));
 			}
 		} catch (SQLException e) {
-			System.out.println("Erreur de connexion");
-			e.getMessage();
-			throw new DALException("Echec de se connecter", e);
+			throw new DALException("Echec de connexion : " + e.getMessage());
 		}
 
-		if (user == null) {
-			System.out.println("Utilisateur inconnu");
+		if (user == null) {			
+			throw new DALException("Utilisateur inconnu");
 		}
 
 		return user;

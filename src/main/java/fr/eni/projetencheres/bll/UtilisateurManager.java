@@ -44,7 +44,6 @@ public class UtilisateurManager {
 		try {
 			user = dao.seConnecter(identifiant, motDePasse, identifiant.contains("@"));
 			if (user == null) {
-				// Attraper la DALException et la personnaliser en BLLException
 				throw new BLLException("Echec de la connexion : identifiant ou mot de passe incorrects");
 			}
 		} catch (DALException e) {
@@ -130,13 +129,13 @@ public class UtilisateurManager {
 	 * M�thode pour supprimer le compte de l'utilisateur
 	 * 
 	 * @param noUtilisateur
-	 * @throws BLLException 
+	 * @throws BLLException
 	 */
 	public void supprimerCompte(int noUtilisateur, String mdp) throws BLLException {
 		try {
 			dao.delete(noUtilisateur, mdp);
 		} catch (DALException e) {
-			throw new BLLException (e.getMessage());
+			throw new BLLException(e.getMessage());
 		}
 	}
 

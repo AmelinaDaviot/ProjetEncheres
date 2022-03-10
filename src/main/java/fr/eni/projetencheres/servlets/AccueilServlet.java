@@ -45,8 +45,7 @@ public class AccueilServlet extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 		}
 
 	}
