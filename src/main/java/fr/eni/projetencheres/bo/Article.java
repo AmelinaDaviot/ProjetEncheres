@@ -13,9 +13,6 @@ public class Article {
 	private int prixInitial;
 	private int prixVente;
 
-//	private int noUtilisateur;
-//	private int noCategorie;
-
 	private Utilisateur vendeur;
 	private Categorie c;
 	private Retrait r;
@@ -124,22 +121,6 @@ public class Article {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-//	public int getNoUtilisateur() {
-//		return noUtilisateur;
-//	}
-
-//	public void setNoUtilisateur(int noUtilisateur) {
-//		this.noUtilisateur = noUtilisateur;
-//	}
-
-//	public int getNoCategorie() {
-//		return noCategorie;
-//	}
-
-//	public void setNoCategorie(int noCategorie) {
-//		this.noCategorie = noCategorie;
-//	}
 	
 	public Utilisateur getVendeur() {
 		return vendeur;

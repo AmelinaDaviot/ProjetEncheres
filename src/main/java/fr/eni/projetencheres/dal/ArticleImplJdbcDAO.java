@@ -34,15 +34,6 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 			+ "ON av.no_utilisateur = u.no_utilisateur "
 			+ "WHERE etat_vente = 'EC'";
 			
-			
-			/*"SELECT * FROM ARTICLES_VENDUS "
-			+ "WHERE etat_vente = 'EC'";*/
-
-//			"SELECT ARTICLES_VENDUS.*, CATEGORIES.* "
-//			+ "FROM ARTICLES_VENDUS INNER JOIN CATEGORIES "
-//			+ "ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie " 
-//			+ "WHERE ARTICLES_VENDUS.no_article = ?";
-//	
 	private final static String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	Connection cnx;
@@ -67,7 +58,6 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 			stmt.setDate(3, Date.valueOf(art.getDateDebutEnchere()));
 			stmt.setDate(4, Date.valueOf(art.getDateFinEnchere()));
 			stmt.setInt(5, art.getPrixInitial());
-//			stmt.setInt(6, art.getPrixVente());
 			stmt.setInt(6, art.getVendeur().getNoUtilisateur());
 			stmt.setInt(7, art.getCategorie().getNoCategorie());
 			if (art.getImage().trim().isEmpty()) {
@@ -81,8 +71,6 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
 				art.setNoArticle(rs.getInt(1));
-//				int noArticle = rs.getInt(1);
-//				art.setNoArticle(noArticle);
 				stmt.close();
 
 				stmt = cnx.prepareStatement(INSERT_RETRAIT);
@@ -119,13 +107,7 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 					art.setPrixInitial(rs.getInt("prix_initial"));
 				}
 				art.setDateFinEnchere(rs.getDate("date_fin_enchere").toLocalDate());
-//				art.setVendeur(rs.getInt("no_utilisateur"));
 				art.getVendeur().setNoUtilisateur(rs.getInt("no_utilisateur"));
-
-//				art = new Article(rs.getInt("no_article"), rs.getString("nom_article"), 
-//						rs.getString("description"), rs.getDate("date_debut_enchere").toLocalDate(), 
-//						rs.getDate("date_fin_enchere").toLocalDate(), rs.getInt("prix_initial"),
-//						rs.getInt("prix_vente"), rs.getString("etat_vente"), rs.getString("image"));
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -139,15 +121,6 @@ public class ArticleImplJdbcDAO implements ArticleDAO {
 	public List<Article> selectAll() throws DALException {
 
 		List<Article> listeArticles = new ArrayList<Article>();
-		/*
-		 * (nom_article, description, date_debut_enchere, date_fin_enchere,
-		 * prix_initial, " + "no_utilisateur, no_categorie, etat_vente, image)
-		 */
-		
-		/*
-		 * (pseudo, nom, prenom, email, telephone, rue, 
-		 * code_postal, ville, mot_de_passe, credit, administrateur)
-		 */
 
 		try {
 			Statement stmt = cnx.createStatement();
