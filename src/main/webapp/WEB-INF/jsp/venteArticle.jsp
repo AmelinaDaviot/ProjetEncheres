@@ -37,7 +37,7 @@
 		<main>
 
 			<h2>Nouvelle Vente</h2>
-
+		</br>
 			<form action="<%=request.getContextPath()%>/vendre-article"
 				method="post">
 
@@ -50,7 +50,7 @@
 							placeholder="Nom de l'article" required>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="description">Description :</label>
@@ -59,7 +59,7 @@
 							required></textarea>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 					<div class="input-group">
@@ -76,14 +76,14 @@
 					</div>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="image">Photo de l'article :</label> <input type="file"
 							id="image" name="image" multiple>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="prix">Mise à prix :</label> <input type="number"
@@ -91,7 +91,7 @@
 							required>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="debutEnchere">Début de l'enchère :</label> <input
@@ -99,7 +99,7 @@
 							name="debutEnchere" required>
 					</div>
 				</div>
-
+			
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<label for="finEnchere">Fin de l'enchère :</label> <input
@@ -107,14 +107,14 @@
 							name="finEnchere" required>
 					</div>
 				</div>
-
+			</br>
 				<div class="row justify-content-center">
 					<div class="col-4">
 				<fieldset>
 					<legend>Retrait</legend>
 					<label for="rue">Rue :</label>
 					<input type="text" class="form-control" id="rue" name="rue" value="${sessionScope.utilisateur.rue}" required>
-					<label for="cpo">Code Postal :</label>
+					<label for="rue">Code Postal :</label>
 					<input type="text" class="form-control" id="cpo" name="cpo" value="${sessionScope.utilisateur.codePostal}" required>
 					<label for="ville">Ville :</label>
 					<input type="text" class="form-control" id="ville" name="ville" value="${sessionScope.utilisateur.ville}" required>
@@ -122,7 +122,7 @@
 				  </fieldset>
 				</div>
 			</div>
-
+		</br>
 				<div class="first-btn">
 					<div class="row justify-content-center">
 						<div class="col-2">
