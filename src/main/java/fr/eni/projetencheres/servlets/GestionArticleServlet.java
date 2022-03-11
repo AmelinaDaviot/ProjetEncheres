@@ -32,19 +32,19 @@ public class GestionArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ANNULATION VENTE ARTICLE
-		Article art;
-		ArticleManager am = ArticleManager.getInstance();
-		try {
-			if (art.getEtatVente().equals('CR') {
-				am.annulerVente(art.getNoArticle());
-				response.sendRedirect(request.getContextPath() + "/accueillir");
-			}
-			
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// TODO ANNULATION VENTE ARTICLE
+//		Article art;
+//		ArticleManager am = ArticleManager.getInstance();
+//		try {
+//			if (art.getEtatVente().equals('CR') {
+//				am.annulerVente(art.getNoArticle());
+//				response.sendRedirect(request.getContextPath() + "/accueillir");
+//			}
+//			
+//		} catch (BLLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }
