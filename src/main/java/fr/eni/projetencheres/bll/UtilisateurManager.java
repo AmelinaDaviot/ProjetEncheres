@@ -1,7 +1,5 @@
 package fr.eni.projetencheres.bll;
 
-import java.sql.SQLException;
-
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
@@ -85,7 +83,6 @@ public class UtilisateurManager {
 			dao.insert(user);
 
 		} catch (DALException e) {
-			System.out.println("erreur BLL " + e.getMessage());
 			throw new BLLException(e.getMessage());
 		}
 
@@ -104,9 +101,9 @@ public class UtilisateurManager {
 	public Utilisateur modifierCompte(Utilisateur user, String confirmation, String mdpActuel) throws BLLException {
 		if (user.getMotDePasse().equals(confirmation)) {
 			try {
-				user = modifierCompte(user, mdpActuel);
-			} catch (BLLException e) {
-				throw e;
+				user = dao.update(user, mdpActuel);
+			} catch (DALException e) {
+				throw new BLLException(e.getMessage());
 			}
 		} else {
 			throw new BLLException(
@@ -118,11 +115,11 @@ public class UtilisateurManager {
 	public Utilisateur modifierCompte(Utilisateur user, String mdpActuel) throws BLLException {
 		try {
 			user = dao.update(user, mdpActuel);
+
 		} catch (DALException e) {
 			throw new BLLException(e.getMessage());
 		}
 		return user;
-
 	}
 
 	/**

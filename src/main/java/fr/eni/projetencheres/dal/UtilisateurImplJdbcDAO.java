@@ -74,7 +74,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			throw new DALException("Echec de connexion : " + e.getMessage());
 		}
 
-		if (user == null) {			
+		if (user == null) {
 			throw new DALException("Utilisateur inconnu");
 		}
 
@@ -115,14 +115,11 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			stmt.close();
 
 		} catch (SQLException e) {
-			System.out.println("erreur" + e.getMessage());
 			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
-				System.out.println("erreur pseudo");
-				throw new DALException("Echec de l'inscription : pseudo d�j� utilis� !");
+				throw new DALException("Echec de l'inscription : pseudo déjà utilisé !");
 			}
 			if (e.getMessage().contains("UQ_utilisateurs_email")) {
-				System.out.println("erreur email");
-				throw new DALException("Echec de l'inscription : adresse mail d�j� utilis�e !");
+				throw new DALException("Echec de l'inscription : adresse mail déjà utilisée !");
 			}
 			throw new DALException("Echec de l'inscription : " + e.getMessage());
 		}
@@ -164,7 +161,7 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 			if (rs.next()) {
 				String mdpBDD = rs.getString("mot_de_passe");
 				if (mdpBDD.equals(mdpActuel)) {
-
+					
 					PreparedStatement stmt2 = cnx.prepareStatement(UPDATE_UTILISATEUR);
 					stmt2.setString(1, user.getPseudo());
 					stmt2.setString(2, user.getNom());
@@ -186,14 +183,18 @@ public class UtilisateurImplJdbcDAO implements UtilisateurDAO {
 				} else {
 					throw new DALException("Erreur de mise a jour du profil : mot de passe actuel incorrect");
 				}
-
 			}
-
 			stmt.close();
 		} catch (SQLException e) {
-			throw new DALException("Erreur lors de la mise a jour du profil : " + e.getMessage());
+			if (e.getMessage().contains("UQ_utilisateurs_pseudo")) {
+				System.out.println(e.getMessage());
+				throw new DALException("Echec de la modification du profil : pseudo déjà utilisé !");
+			}
+			if (e.getMessage().contains("UQ_utilisateurs_email")) {
+				System.out.println(e.getMessage());
+				throw new DALException("Echec de la modification du profil : adresse mail déjà utilisée !");
+			}
 		}
-
 		return user;
 	}
 
