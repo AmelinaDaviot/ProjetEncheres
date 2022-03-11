@@ -107,7 +107,7 @@ public class UtilisateurManager {
 			}
 		} else {
 			throw new BLLException(
-					"Echec de l'inscription : le mot de passe et la confirmation sont " + "différents !");
+					"Echec de la modification : le mot de passe et la confirmation sont " + "différents !");
 		}
 		return user;
 	}
